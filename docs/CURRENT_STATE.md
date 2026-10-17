@@ -24,7 +24,7 @@ Session memory resets on reload; no live email, payment, accounting, auth, permi
 ## Site continuity
 - Existing private Site: https://businessos-relationship.pramodh7.chatgpt.site
 - Project: appgprj_6ad36ebf89f88191b65d8532a6578a56 (owner-only audience verified this session).
-- Previous published source: 8550e73e8ae32d56d0a601fd7ff457baf0a20127 (qualification-only). Expanded publication status/revision will be recorded after native deployment succeeds.
+- Expanded source: 37e8ba5fdedbb70e0d2d7f501af4187d76a50a9e, synchronized from GitHub implementation 3c1db7cc7354e055cbf1b8b51e4e5bfe096538b5. Native private deployment returned succeeded on 2026-10-17. Hosted browser verification remains pending.
 - GitHub is canonical; Site dist is deliberately synchronized from approved frontend files. No automatic sync. Reuse the same Site and source helper, preserve audience, publish and record source revision.
 
 ## Next action

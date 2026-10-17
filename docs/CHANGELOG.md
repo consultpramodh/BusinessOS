@@ -27,3 +27,4 @@ Meaningful changes only; commits remain the detailed history.
 - Connected Today, Relationships, Work, Schedule, Money and Settings to one synthetic model; multiple jobs per customer.
 - Added new enquiries/search/filter, qualification through quote/booking/service/invoice/payment/contribution, quote revision and follow-up dates.
 - Added model and DOM integration tests. Passed; expanded browser/mobile/accessibility QA remains pending.
+- Published connected prototype to the existing owner-private Site; native deployment succeeded. Source revision mapping is in CURRENT_STATE.md.
