@@ -23,3 +23,6 @@ Apple/Wealthsimple-inspired clarity, no copied assets; 4H1W and critical counter
 
 ## Updates and freshness
 GitHub main and Issues are the source of truth. Re-read them at the start of every active work session and before significant edits. Update state/change log in the same work session as a meaningful change. This does not imply autonomous continuous syncing or background monitoring.
+
+## Version-controlled prompts
+Read prompts/README.md and prompts/MASTER_PROJECT_PROMPT.md at session start; read prompts/UI_UX_SYSTEM.md for UI work, relevant prompts/features/*.md for feature work, and prompts/VERIFICATION.md before completion claims. Update prompts when accepted behavior changes, not on every cosmetic edit.
