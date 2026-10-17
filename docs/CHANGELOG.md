@@ -9,3 +9,5 @@ Meaningful changes only; commits remain the detailed history.
 - Browser rendering and interaction verification remain pending.
 
 - Added detailed, version-controlled master, feature, UI/UX, verification and session-handoff prompts in prompts/; linked them from project navigation and operating instructions.
+
+- Added docs/FEATURE_EXECUTION_ROADMAP.md with phase gates and dependency-ordered features; linked it from the project index and agent instructions.
