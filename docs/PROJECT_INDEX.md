@@ -34,3 +34,6 @@ Repository: https://github.com/consultpramodh/BusinessOS
 - Preserved legacy dashboard: lifecycle.html, lifecycle.css, lifecycle.js
 - Qualification contract: prompts/features/LEAD_QUALIFICATION.md
 - Reproducible browser behavior suite: tests/workspace.cjs
+
+## Working Site
+https://businessos-relationship.pramodh7.chatgpt.site (owner-private). Deployment identity, source revision and future update procedure: CURRENT_STATE.md. Canonical GitHub source and Site deployment source are separate; update deliberately.

@@ -16,7 +16,7 @@ Passed: desktop rail collapse/hover/focus/pin, keyboard Tab, invalid/empty submi
 Desktop and mobile full-page browser captures inspected. Syntax and git diff whitespace checks passed.
 
 ## Limits / outstanding gates
-- In-memory synthetic data resets on reload; no backend, permissions, production storage, integrations or deployment.
+- In-memory synthetic data resets on reload; no backend, permissions, production storage or integrations.
 - Quote preparation is an honest empty state; no pricing, quote creation, acceptance or sending yet.
 - No screen-reader assistive-technology test, Safari/iOS test, full text-zoom/contrast audit or real operator validation. Browser tests do not establish complete accessibility or Apple-level quality.
 - Legacy economics/financial labels still need audit before integration. Legacy UI is intentionally a separate demo.
@@ -24,3 +24,11 @@ Desktop and mobile full-page browser captures inspected. Syntax and git diff whi
 
 ## Next action
 Complete remaining Phase 0 accessibility/legacy audit, then P1.2 quote creation/edit/acceptance within this relationship. Do not start backend or unrelated modules.
+
+## Private Sites deployment — 2026-10-17
+- URL: https://businessos-relationship.pramodh7.chatgpt.site
+- Project: appgprj_6ad36ebf89f88191b65d8532a6578a56 · owner-private.
+- Site source commit: 8550e73e8ae32d56d0a601fd7ff457baf0a20127, copied from GitHub implementation 6d8256cc9f657d1cc7527b985771c788c8e8225f.
+- Native deployment returned succeeded. No new hosted browser QA; earlier local behavior tests apply to copied frontend. No automatic GitHub→Sites synchronization exists.
+- For updates: use this existing Site/project, follow Sites source opening/publishing workflow, copy approved canonical frontend into dist, publish, and record both revisions. Do not create another Site.
+- Sales value hypothesis: reduce qualification back-and-forth before quoting. Validate with a coordinator walkthrough and measured task completion; no ROI or conversion improvement established.
