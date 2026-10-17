@@ -1,32 +1,26 @@
 # Current state
 
-**Last reviewed:** 2026-10-17 (documentation pass; not a browser verification)
-**Repository:** consultpramodh/BusinessOS · branch main · public visibility at last check
-**Phase:** Static UI prototype, not production software
+Last reviewed: 2026-10-17 · branch main
 
-## Implemented and committed
-- Minimal HTML/CSS/JavaScript dashboard (index.html, styles.css, script.js)
-- Synthetic jobs, stage advancement, sample job creation, and derived summary metrics
-- Mobile-responsive layout rules and dialog-based job details
-- README, TASKS, design principles, demo limitations, and repository navigation docs
+## Implemented
+- Dependency-free customer workspace: Sarah Mitchell synthetic New enquiry → qualification → ready for quote preparation.
+- Neutral design tokens, editorial typography, form/button/focus/error patterns and responsive layouts.
+- 76px desktop icon rail, hover/focus expansion, pin/unpin; labelled mobile navigation.
+- Required service/request/contact/location fields; optional equipment disclosure; safe text rendering.
+- Invalid saves preserve input and focus first error; successful save shows editable snapshot and one qualification history entry.
+- Original dashboard preserved separately at lifecycle.html / lifecycle.css / lifecycle.js. Legacy metrics and full workflow remain unverified.
 
-## Not verified
-- Actual visual rendering at desktop/mobile sizes
-- Keyboard and screen-reader usability
-- All browser interactions and console errors
-- Financial reporting correctness beyond code inspection
+## Verification evidence
+Chromium 145 headless, Playwright; `node tests/workspace.cjs` (optional CHROMIUM_PATH for installed browser).
+Passed: desktop rail collapse/hover/focus/pin, keyboard Tab, invalid/empty submission, fractional count, malformed phone/postal, valid save, edit/resave without duplicate history, injected markup rendered as text, reload reset, no horizontal overflow at 360/390/768/1440px, labelled mobile nav, reduced motion, legacy dialog/Escape smoke test, no page errors.
+Desktop and mobile full-page browser captures inspected. Syntax and git diff whitespace checks passed.
 
-## Known limitations
-- No backend, authentication, persistence, scheduling, payment processing, or tenant isolation
-- All data resets on reload; sample data only
-- Stage progression is simplified; profitability uses estimated direct costs
-- No deployment URL or production readiness claim
+## Limits / outstanding gates
+- In-memory synthetic data resets on reload; no backend, permissions, production storage, integrations or deployment.
+- Quote preparation is an honest empty state; no pricing, quote creation, acceptance or sending yet.
+- No screen-reader assistive-technology test, Safari/iOS test, full text-zoom/contrast audit or real operator validation. Browser tests do not establish complete accessibility or Apple-level quality.
+- Legacy economics/financial labels still need audit before integration. Legacy UI is intentionally a separate demo.
+- Tests require externally installed Playwright/Chromium; no runtime dependency added.
 
-## Immediate next action
-Run the manual checklist in docs/demo-limitations.md in a real browser; fix defects before expanding scope. Prioritize GitHub Issue #2 and Issue #5.
-
-## How to update this file
-After each meaningful implementation, record what was actually committed and tested, what remains unverified, known defects, and the next actionable step. Do not substitute intentions for completed work.
-
-## Execution sequence
-The authoritative planned feature order is docs/FEATURE_EXECUTION_ROADMAP.md. Phase 0 browser QA and UI foundation are next; later phases are conditional, not completed.
+## Next action
+Complete remaining Phase 0 accessibility/legacy audit, then P1.2 quote creation/edit/acceptance within this relationship. Do not start backend or unrelated modules.

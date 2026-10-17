@@ -18,3 +18,5 @@ These are version-controlled **working specifications**, not substitutes for cur
 - For each significant implementation, update docs/CURRENT_STATE.md and docs/CHANGELOG.md.
 - Keep prompts detailed enough to avoid ambiguity, but prefer clear requirements over long inspirational language.
 - Never put secrets, credentials, customer PII or private business data into prompts or repository.
+
+Current active slice: [Lead qualification](features/LEAD_QUALIFICATION.md) (#6); takes precedence over the old generic stage-advance interaction for the default workspace.

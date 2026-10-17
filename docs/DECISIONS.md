@@ -20,3 +20,6 @@
 **Decision:** Keep a short project index, factual state snapshot, decision log, changelog and GitHub Issues. Read current GitHub content at each work session; update documentation with meaningful changes.
 **Why:** Reduce cross-chat confusion without creating unnecessary automation or duplicate project management systems.
 **Constraint:** No claim of continuous background sync without an actual scheduled process.
+
+## 2026-10-17 — Relationship-first foundation and qualification
+User approved Phase 0 plus New enquiry → Qualify Lead slice. Default entry now centers Sarah's relationship rather than overview metrics. Preserve original lifecycle prototype separately to avoid deleting existing behavior while keeping unaudited financial metrics out of the new workspace. No framework/backend. Quote preparation stops at a reviewable saved qualification; it must not imply a quote exists. Desktop hover/focus rail also has a pin; mobile uses explicit text links. Main risk: visual refinement alone does not demonstrate operator value; real operator testing remains required.

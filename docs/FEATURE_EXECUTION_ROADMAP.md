@@ -65,3 +65,6 @@ Full general ledger, payroll, broad social publishing, paid-ad management, AI ag
 1. Run browser QA of the existing dashboard (P0.2).
 2. Correct the UI and misleading demo metrics; define the minimal reusable design primitives (P0.3).
 3. Specify and implement lead intake (P1.1) as the first true workflow action.
+
+## 2026-10-17 execution update
+User explicitly authorized combining P0.3 foundation with P1.1 qualification as one coherent slice (#6). Implemented and browser-tested; see CURRENT_STATE.md for evidence and remaining gates. This is not completion of Phase 0: full accessibility and legacy metric audit remain open. P1.2 quote creation is next after those checks. No later infrastructure phase is activated.

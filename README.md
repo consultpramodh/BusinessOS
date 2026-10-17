@@ -12,3 +12,8 @@ One complete demonstrable workflow with synthetic data. No accounting engine, AI
 - Never invent validation: distinguish demo data, hypotheses and tested functionality.
 
 See [TASKS.md](TASKS.md) and [design principles](docs/product-principles.md).
+
+## Run the prototype
+Serve this directory with `python -m http.server 8000`, then open http://localhost:8000. Default entry is Sarah Mitchell's enquiry qualification workspace. Data is synthetic and resets on reload; quote creation is not implemented. Original dashboard remains at lifecycle.html. See docs/CURRENT_STATE.md for verified behavior and outstanding checks.
+
+Browser checks: with Playwright/Chromium installed, run `node tests/workspace.cjs` against the server. `CHROMIUM_PATH` optionally selects an existing browser.

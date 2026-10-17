@@ -1,12 +1,7 @@
 # Demo limitations
 
-This is a static, dependency-free, browser-only design prototype. All jobs are synthetic and reset on reload. There is no authentication, database, scheduling engine, payment integration, or actual accounting. The workflow uses a simplified stage progression and estimated direct costs; it does not represent booked revenue or audited profitability. The overview metrics are calculated from the sample data, not real business records. Do not deploy as a real customer-data application.
+Default entry is the synthetic Sarah Mitchell qualification workspace. Saving means an in-memory qualification snapshot, not durable storage or a created/sent quote. Reload resets all input and state. No real customer data, authentication, roles, backend, scheduling engine, payments or accounting.
 
-## Manual verification checklist
-- [ ] Open index.html at 375px and 1440px viewport widths
-- [ ] Navigate via keyboard and verify visible focus
-- [ ] Open a job, advance stage, and verify updated counts
-- [ ] Create a sample job; verify it appears in the list
-- [ ] Confirm dialogs close with Escape and Close
-- [ ] Check text contrast and screen-reader announcements
-- [ ] Check browser console for errors
+The original simplified dashboard remains at lifecycle.html. Its financial semantics and full stage transitions have not been audited; do not present it as production functionality.
+
+Browser checks and remaining gaps are recorded in CURRENT_STATE.md. Run a static server (`python -m http.server 8000`) and `node tests/workspace.cjs` with Playwright/Chromium installed. Optional CHROMIUM_PATH selects an existing Chromium binary. Tests write temporary screenshots under /tmp; these are verification aids, not product assets.

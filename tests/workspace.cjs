@@ -1,0 +1,62 @@
+// Prerequisite: Playwright and its Chromium installed in the development environment.
+// Run a static server on :8000, then node tests/workspace.cjs.
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+(async()=>{
+ const browser=await chromium.launch({headless:true, ...(process.env.CHROMIUM_PATH ? {executablePath:process.env.CHROMIUM_PATH} : {})});
+ const page=await browser.newPage({viewport:{width:1440,height:1000}});
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('http://localhost:8000');
+ await page.mouse.move(1000,10);
+ assert.equal(await page.locator('.sidebar').evaluate(e=>e.offsetWidth),76);
+ await page.locator('.brand').hover();await page.waitForTimeout(250);
+ assert.equal(await page.locator('.sidebar').evaluate(e=>e.offsetWidth),236);
+ await page.locator('#pin').click();await page.mouse.move(1000,10);
+ assert.equal(await page.locator('#pin').getAttribute('aria-pressed'),'true');
+ await page.locator('#pin').click();await page.locator('h1').click();await page.waitForTimeout(250);
+ assert.equal(await page.locator('.sidebar').evaluate(e=>e.offsetWidth),76);
+ await page.locator('.brand').focus();await page.waitForTimeout(250);
+ assert.equal(await page.locator('.sidebar').evaluate(e=>e.offsetWidth),236);
+ await page.keyboard.press('Tab');assert.equal(await page.locator('[aria-current]').evaluate(e=>e===document.activeElement),true);
+ await page.getByRole('button',{name:'Save and Continue'}).click();
+ assert.equal(await page.locator('[aria-invalid=true]').count(),4);
+ assert.equal(await page.locator('[name=service]').evaluate(e=>e===document.activeElement),true);
+ await page.locator('[name=service]').selectOption({label:'Fireplace repair'});
+ await page.locator('[name=issue]').fill('Pilot light will not stay on.');
+ await page.locator('[name=address]').fill('123 Example Lane');
+ await page.locator('[name=postal]').fill('invalid');
+ await page.locator('[name=count]').fill('1.5');
+ await page.locator('[name=phone]').fill('abc4165550142');
+ await page.getByRole('button',{name:'Save and Continue'}).click();
+ assert.equal(await page.locator('[aria-invalid=true]').count(),3);
+ assert.equal(await page.locator('#quote').isVisible(),false);
+ await page.locator('[name=count]').fill('1');await page.locator('[name=postal]').fill('L4Y 1A1');await page.locator('[name=phone]').fill('416-555-0142');
+ await page.locator('summary').click();await page.locator('[name=brand]').fill('<img src=x onerror=alert(1)>');
+ await page.locator('h1').click(); await page.evaluate(()=>scrollTo(0,0)); await page.waitForTimeout(250); await page.screenshot({path:'/tmp/businessos-desktop.png',fullPage:true});
+ await page.getByRole('button',{name:'Save and Continue'}).click();
+ assert.equal(await page.locator('#stage').textContent(),'Ready for quote');
+ assert.equal(await page.locator('#qualificationSummary img').count(),0);
+ assert.equal(await page.locator('#qualifiedEvent').count(),1);
+ await page.locator('#edit').click();assert.equal(await page.locator('[name=issue]').inputValue(),'Pilot light will not stay on.');
+ await page.getByRole('button',{name:'Save and Continue'}).click();assert.equal(await page.locator('#qualifiedEvent').count(),1);
+ await page.reload();assert.equal(await page.locator('#stage').textContent(),'New enquiry');
+ for(const width of [360,390,768,1440]){
+   await page.setViewportSize({width,height:900});
+   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`overflow at ${width}`);
+ }
+ await page.setViewportSize({width:360,height:900});
+ assert.equal(await page.locator('#pin').isVisible(),false);
+ assert.equal(await page.getByRole('link',{name:'Relationship',exact:true}).isVisible(),true);
+ await page.locator('h1').click(); await page.evaluate(()=>scrollTo(0,0)); await page.waitForTimeout(250); await page.screenshot({path:'/tmp/businessos-mobile.png',fullPage:true});
+ await page.getByRole('button',{name:'Save and Continue'}).click();
+ assert.equal(await page.locator('#errors').isVisible(),true);
+ await page.emulateMedia({reducedMotion:'reduce'});
+ assert.equal(await page.locator('.sidebar').evaluate(e=>getComputedStyle(e).transitionDuration),'0s');
+ await page.goto('http://localhost:8000/lifecycle.html');
+ assert.equal(await page.locator('.job-row').count(),4);
+ await page.locator('.job-row').first().click();assert.equal(await page.locator('#jobDialog').isVisible(),true);
+ await page.keyboard.press('Escape');assert.equal(await page.locator('#jobDialog').isVisible(),false);
+ assert.deepEqual(errors,[]);
+ console.log('PASS: sidebar, keyboard, validation, edit/resave, XSS text, reload, four viewport widths, mobile navigation, reduced motion, legacy smoke; no page errors.');
+ await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

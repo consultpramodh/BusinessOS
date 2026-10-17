@@ -28,3 +28,9 @@ Repository: https://github.com/consultpramodh/BusinessOS
 
 ## Build sequence
 - [Dependency-ordered feature roadmap](FEATURE_EXECUTION_ROADMAP.md) — phases, gates, priorities and next three actions.
+
+## Current frontend paths
+- Customer relationship: index.html, styles.css, script.js
+- Preserved legacy dashboard: lifecycle.html, lifecycle.css, lifecycle.js
+- Qualification contract: prompts/features/LEAD_QUALIFICATION.md
+- Reproducible browser behavior suite: tests/workspace.cjs
