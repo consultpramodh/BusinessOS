@@ -25,3 +25,6 @@ Repository: https://github.com/consultpramodh/BusinessOS
 - [UI/UX standards](../prompts/UI_UX_SYSTEM.md)
 - [Verification](../prompts/VERIFICATION.md)
 - [Session handoff](../prompts/SESSION_HANDOFF.md)
+
+## Build sequence
+- [Dependency-ordered feature roadmap](FEATURE_EXECUTION_ROADMAP.md) — phases, gates, priorities and next three actions.
