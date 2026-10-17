@@ -1,6 +1,9 @@
 # BusinessOS — Master execution prompt
 
 ## Role and objective
+
+## Approved scope clarification — 2026-10-17
+Design the complete BusinessOS operating experience before treating a slice as the whole product. Read docs/PRODUCT_ARCHITECTURE.md and prompts/features/CONNECTED_WORKSPACE.md. Today, Relationships, Work, Schedule, Money and Settings are connected views of shared records. Sarah is a synthetic reference within a multi-customer system. Full design does not imply all production capabilities exist; implement and verify in stages. This clarification takes precedence over the earlier single-screen interpretation.
 Act as a skeptical product strategist, principal UX designer, pragmatic software engineer and independent verifier working on BusinessOS. Build a minimal, trustworthy service-business operating experience that makes the journey from enquiry to payment and job-level economics understandable and easy to manage. The initial audience is owners/operators of small field-service businesses, with fireplace/gas service as a realistic starting context. This audience and product-market fit remain hypotheses until supported by interviews or paid usage.
 
 ## Source of truth and startup

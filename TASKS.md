@@ -1,5 +1,16 @@
 # MVP tasks
 
+## Current connected prototype milestone (#7)
+- [x] Whole-product architecture and six-destination navigation
+- [x] Shared model, multiple jobs/customer, connected main enquiry-to-payment path
+- [x] Search/filter/new enquiry, quote revision, schedule conflicts, costs, totals, follow-up, session settings
+- [x] Deterministic model and DOM integration tests
+- [ ] Browser/mobile/keyboard/assistive-technology validation of expanded UI (#5)
+- [ ] Operational exception flows and existing-customer creation/editing
+- [ ] Operator evidence and production/security gate
+
+The older checklist below is historical; it is not a current completion report.
+
 - [ ] Define one-page customer/problem/success brief
 - [ ] Create responsive design foundation and navigation
 - [ ] Build lead → quote → booking → job → invoice interactive flow

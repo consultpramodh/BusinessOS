@@ -19,4 +19,4 @@ These are version-controlled **working specifications**, not substitutes for cur
 - Keep prompts detailed enough to avoid ambiguity, but prefer clear requirements over long inspirational language.
 - Never put secrets, credentials, customer PII or private business data into prompts or repository.
 
-Current active slice: [Lead qualification](features/LEAD_QUALIFICATION.md) (#6); takes precedence over the old generic stage-advance interaction for the default workspace.
+Current active contract: [Connected workspace](features/CONNECTED_WORKSPACE.md) (#7), with [whole-product architecture](../docs/PRODUCT_ARCHITECTURE.md). Qualification (#6) and legacy lifecycle prompts are historical narrower slices; follow the connected contract when they conflict.

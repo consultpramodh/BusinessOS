@@ -1,5 +1,5 @@
-// Prerequisite: Playwright and its Chromium installed in the development environment.
-// Run a static server on :8000, then node tests/workspace.cjs.
+// ARCHIVED: historical qualification-only UI (commit 6d8256c); not the current connected UI.
+// Preserved as evidence of the original checks. Do not use as the current release gate.
 const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
 (async()=>{

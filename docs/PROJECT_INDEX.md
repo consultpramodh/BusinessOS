@@ -28,12 +28,15 @@ Repository: https://github.com/consultpramodh/BusinessOS
 
 ## Build sequence
 - [Dependency-ordered feature roadmap](FEATURE_EXECUTION_ROADMAP.md) — phases, gates, priorities and next three actions.
+- [Whole-product architecture](PRODUCT_ARCHITECTURE.md) — six destinations, shared entities, journey and explicit backlog. Read this before interpreting a feature slice as the whole product.
+- [Connected workspace contract](../prompts/features/CONNECTED_WORKSPACE.md) — current implementation requirements (#7).
 
 ## Current frontend paths
-- Customer relationship: index.html, styles.css, script.js
+- Connected app shell, routing and views: index.html, styles.css, os.css, script.js
+- Shared synthetic records, transitions and financial derivations: model.js
 - Preserved legacy dashboard: lifecycle.html, lifecycle.css, lifecycle.js
 - Qualification contract: prompts/features/LEAD_QUALIFICATION.md
-- Reproducible browser behavior suite: tests/workspace.cjs
+- Current tests: tests/model.cjs and tests/ui.cjs (model/DOM only); historical browser evidence: tests/archive/qualification-v1.cjs
 
-## Working Site
-https://businessos-relationship.pramodh7.chatgpt.site (owner-private). Deployment identity, source revision and future update procedure: CURRENT_STATE.md. Canonical GitHub source and Site deployment source are separate; update deliberately.
+## Existing working Site
+https://businessos-relationship.pramodh7.chatgpt.site (owner-private). Existing identity and deliberate update procedure are in CURRENT_STATE.md. GitHub remains canonical; Site source is a separate synchronized checkout, with no automatic sync.

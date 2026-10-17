@@ -1,4 +1,6 @@
 # Enquiry qualification — approved slice
+
+Historical qualification-only slice. Current whole-system contract: CONNECTED_WORKSPACE.md. Shared qualification now leads to functional demo quote preparation; reference current state and tests rather than the old quote-empty-state acceptance criterion below.
 Issue #6 · 2026-10-17. Synthetic Sarah Mitchell scenario; no customer validation claimed.
 
 ## 4H1W

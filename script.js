@@ -1,81 +1,54 @@
 'use strict';
-const form = document.querySelector('#qualification');
-const pin = document.querySelector('#pin');
-const sidebar = document.querySelector('.sidebar');
-const announcement = document.querySelector('#announcement');
-let saved = null;
-pin.addEventListener('click', () => {
-  const pinned = sidebar.classList.toggle('pinned');
-  pin.setAttribute('aria-pressed', String(pinned));
-  pin.querySelector('.nav-label').textContent = pinned ? 'Unpin navigation' : 'Pin navigation';
-});
-function clearErrors() {
-  form.querySelectorAll('.field-error').forEach(node => node.remove());
-  form.querySelectorAll('[aria-invalid]').forEach(node => {
-    node.removeAttribute('aria-invalid'); node.removeAttribute('aria-describedby');
-  });
-  document.querySelector('#errors').hidden = true;
+const M=BusinessModel,state=M.seed(),main=document.querySelector('#main');
+const destinations=[['today','Today','◷'],['relationships','Relationships','◎'],['work','Work','▤'],['schedule','Schedule','▦'],['money','Money','↗'],['settings','Settings','⚙']];
+const currency=n=>new Intl.NumberFormat('en-CA',{style:'currency',currency:'CAD'}).format(n/100);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const customer=j=>state.customers.find(c=>c.id===j.customerId);
+const place=j=>state.locations.find(l=>l.id===j.locationId);
+const link=j=>'#relationship/'+j.customerId+'/'+j.id;
+const heading=(tag,title,description)=>`<section class="identity"><p class="eyebrow">${esc(tag)}</p><h1 tabindex="-1">${esc(title)}<span class="period">.</span></h1><p class="lede">${esc(description)}</p></section>`;
+const field=(label,name,value='',type='text',extra='')=>`<label>${label}<input name="${name}" type="${type}" value="${esc(value)}" ${extra} required></label>`;
+const option=(name,items,chosen)=>`<select name="${name}" required>${items.map(v=>`<option ${v===chosen?'selected':''}>${esc(v)}</option>`).join('')}</select>`;
+function row(j){return `<a class="record" href="${link(j)}"><span><strong>${esc(customer(j).name)}</strong><small>${esc(j.service)} · ${esc(place(j).city)}</small></span><span class="record-state">${M.stages[j.stage]}<small>${M.actions[j.stage]} →</small></span></a>`;}
+function records(jobs,empty='No work here yet.'){return jobs.length?`<div class="records">${jobs.map(row).join('')}</div>`:`<div class="empty">${empty} <a href="#relationships">View relationships →</a></div>`;}
+function timeline(j){return `<ol class="timeline">${j.events.map(e=>`<li><strong>${esc(e.text)}</strong><span>${esc(e.at)}</span></li>`).join('')}</ol>`;}
+function formFor(j){const c=customer(j),l=place(j),equipment=state.equipment.find(e=>e.id===j.equipmentId);let fields='';
+  if(j.stage===0)fields=`<fieldset><legend>01 · Service & equipment</legend><div class="fields"><label>Service needed${option('service',['Fireplace service & maintenance','Fireplace repair','Fireplace inspection'],j.service)}</label>${field('Number of fireplaces','count',j.count,'number','min="1" max="10" step="1"')}<label class="full">What needs attention?<textarea name="issue" required maxlength="1500">${esc(j.issue)}</textarea></label></div><details><summary>Equipment details · optional</summary><div class="fields equipment">${['fuel','brand','model','room'].map(k=>`<label>${k.charAt(0).toUpperCase()+k.slice(1)} · optional<input name="${k}" value="${esc(equipment[k])}" maxlength="100"></label>`).join('')}</div></details></fieldset><fieldset><legend>02 · Contact & location</legend><div class="fields">${field('Customer name','name',c.name,'text','autocomplete="name" maxlength="100"')}${field('Email','email',c.email,'email','autocomplete="email"')}${field('Phone','phone',c.phone,'tel','autocomplete="tel"')}${field('Service address','address',l.address,'text','autocomplete="street-address" maxlength="200"')}${field('City','city',l.city)}${field('Postal code','postal',l.postal,'text','autocomplete="postal-code" maxlength="7"')}</div></fieldset>`;
+  if(j.stage===1)fields=`<p>Prepare a service estimate for review. All amounts are CAD, before tax. Nothing is emailed.</p><div class="fields">${field('Quoted service amount · CAD','amount',(state.settings.rate*j.count).toFixed(2),'number','min="0.01" max="1000000" step="0.01"')}</div><p class="caption">Default rate from Settings; adjust for this job.</p>`;
+  if(j.stage===2)fields=`<div class="quote-amount">${currency(j.quote.amount)} <small>CAD · before tax</small></div><p>Record ${esc(c.name.split(' ')[0])}’s acceptance for this synthetic walkthrough. No message is sent or signature captured.</p><details><summary>Revise quote amount</summary><label>Revised amount · CAD<input id="revisedAmount" type="number" min="0.01" step="0.01" value="${j.quote.amount/100}"></label><button class="secondary" id="revise" type="button">Save revised quote</button></details>`;
+  if(j.stage===3)fields=`<div class="fields">${field('Service date','date','','date',`min="${M.today()}"`)}<label>Arrival window${option('window',['AM','PM'])}</label><label>Technician${option('technician',state.settings.technicians)}</label></div><p class="caption">One appointment per technician per window. Route and availability optimization are future work.</p>`;
+  if(j.stage===4)fields=`<div class="saved-note">${esc(j.appointment.date)} · ${j.appointment.window} · ${esc(j.appointment.technician)}</div><p>Review the equipment and service request before starting the visit.</p>`;
+  if(j.stage===5)fields=`<label>Completion notes<textarea name="notes" required maxlength="2000" placeholder="Work performed, findings and any return visit needed"></textarea></label><h3>Estimated direct costs</h3><div class="fields">${field('Labor · CAD','labor','','number','min="0" step="0.01"')}${field('Materials · CAD','materials','','number','min="0" step="0.01"')}${field('Other direct costs · CAD','other','','number','min="0" step="0.01"')}</div><p class="caption">Enter zero only when confirmed. Missing costs must not imply zero.</p>`;
+  if(j.stage===6)fields=`<p>${esc(j.notes)}</p><div class="quote-amount">${currency(j.quote.amount)} <small>CAD · before tax</small></div><p>Create a synthetic invoice from the accepted quote. No accounting entry or email is sent.</p>`;
+  if(j.stage===7)fields=`<p>${esc(j.invoice.id)} · outstanding</p><div class="quote-amount">${currency(j.invoice.amount)}</div><p>Record a full synthetic payment. No money is moved. Partial payments are outside this walkthrough.</p>`;
+  if(j.stage===8)return `<div class="saved-note">Demo payment recorded · ${currency(j.payment.amount)}</div><h3>Estimated direct contribution</h3><div class="quote-amount">${M.contribution(j)===null?'Not available':currency(M.contribution(j))}</div><p>Invoice before tax less estimated labor, materials and other direct costs. Excludes overhead and tax; this is not net profit.</p><dl class="facts">${j.costs?Object.entries(j.costs).map(([k,v])=>`<dt>${k}</dt><dd>${currency(v)}</dd>`).join(''):''}</dl><a class="secondary inline" href="#money">Review Money →</a><details><summary>Plan next service · optional</summary><form id="followup"><label>Follow-up date<input name="date" type="date" min="${M.today()}" required value="${esc(j.followup||'')}"></label><button class="secondary">Save follow-up</button></form><p class="caption">${j.followup?'Planned for '+esc(j.followup):'No follow-up planned.'}</p></details>`;
+  return `<form id="actionForm"><div id="formError" class="error-summary" role="alert" hidden></div>${fields}<div class="form-footer"><span>Changes stay in this session.</span><button class="primary">${j.stage===0?'Save and Continue to Quote':M.actions[j.stage]} <span aria-hidden="true">→</span></button></div></form>`;
 }
-function validate(data) {
-  const errors = {};
-  for (const field of ['service','issue','name','email','phone','city','address','postal']) {
-    if (!data[field]) errors[field] = 'Enter ' + ({issue:'the service request',name:'the customer name',postal:'a postal code',service:'a service'}[field] || 'a valid ' + field) + '.';
-  }
-  if (data.email && !form.elements.email.validity.valid) errors.email = 'Enter a valid email address.';
-  if (data.phone && (!/^\+?[\d\s().-]+$/.test(data.phone) || !/^\d{10,15}$/.test(data.phone.replace(/\D/g,'')))) errors.phone = 'Enter a phone number with 10–15 digits.';
-  if (data.postal && !/^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z] ?\d[ABCEGHJ-NPRSTV-Z]\d$/i.test(data.postal)) errors.postal = 'Enter a Canadian postal code, e.g. L4Y 1A1.';
-  if (!Number.isInteger(Number(data.count)) || Number(data.count)<1 || Number(data.count)>10) errors.count = 'Enter a whole number from 1 to 10.';
-  return errors;
+function relationship(cId,jId){const c=state.customers.find(x=>x.id===cId);if(!c)return notFound();const jobs=state.jobs.filter(x=>x.customerId===cId);const j=jobs.find(x=>x.id===jId)||jobs[0];
+  main.innerHTML=heading('CUSTOMER RELATIONSHIP · '+c.id.toUpperCase(),c.name,'Every conversation, visit and next step, together.')+`<div class="context"><span>${esc(c.email)}</span><span>${esc(c.phone)}</span><span>${esc(place(j).city)}, Ontario</span></div><div class="job-switch">${jobs.map(x=>`<a ${x.id===j.id?'aria-current="true"':''} href="${link(x)}">${esc(x.service)} · ${M.stages[x.stage]}</a>`).join('')}</div><div class="workspace"><section class="action-area"><p class="eyebrow">NEXT ACTION · ${M.stages[j.stage].toUpperCase()}</p><h2>${M.actions[j.stage]}</h2>${formFor(j)}</section><aside class="relationship"><section><p class="eyebrow">THE REQUEST</p><blockquote>${esc(j.issue)}</blockquote><p class="caption">${esc(j.service)} · ${j.count} fireplace${j.count>1?'s':''}</p></section><section><p class="eyebrow">LOCATION & EQUIPMENT</p><p>${esc(place(j).address)}<br>${esc(place(j).city)} · ${esc(place(j).postal)}</p><dl class="facts">${Object.entries(state.equipment.find(x=>x.id===j.equipmentId)).filter(([k])=>!['id','locationId'].includes(k)).map(([k,v])=>`<dt>${k}</dt><dd>${esc(v)}</dd>`).join('')}</dl></section><section><p class="eyebrow">RELATIONSHIP HISTORY</p>${timeline(j)}</section></aside></div>`;
+  const form=document.querySelector('#actionForm');if(form)form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;try{M.transition(state,j.id,Object.fromEntries(new FormData(form)));announce('Saved. '+M.stages[j.stage]);render();}catch(error){showError(form,error);}});
+  document.querySelector('#revise')?.addEventListener('click',()=>{try{const amount=M.money(document.querySelector('#revisedAmount').value);if(amount<=0)throw Error('Quote must be greater than zero.');j.quote.amount=amount;j.events.push({text:'Demo quote revised',at:'This session'});render();}catch(e){showError(form,e);}});
+  document.querySelector('#followup')?.addEventListener('submit',e=>{e.preventDefault();const date=new FormData(e.target).get('date');if(!M.validDate(date)){announce('Choose today or a later follow-up date.');return;}j.followup=date;announce('Follow-up saved for '+date);render();});
 }
-form.addEventListener('submit', event => {
-  event.preventDefault(); clearErrors();
-  const data = Object.fromEntries([...new FormData(form)].map(([key,value])=>[key,value.trim()]));
-  const errors = validate(data);
-  if (Object.keys(errors).length) {
-    for (const [name,message] of Object.entries(errors)) {
-      const input = form.elements[name];
-      const error = document.createElement('span'); error.className = 'field-error';
-      error.id = name + '-error'; error.textContent = message;
-      input.setAttribute('aria-invalid','true'); input.setAttribute('aria-describedby',error.id);
-      input.after(error);
-    }
-    const summary = document.querySelector('#errors');
-    summary.textContent = 'Qualification not saved. Check ' + Object.keys(errors).length + ' highlighted fields.';
-    summary.hidden = false; form.elements[Object.keys(errors)[0]].focus(); return;
+function showError(form,error){const el=form.querySelector('#formError');el.textContent=error.message;el.hidden=false;el.setAttribute('tabindex','-1');el.focus();}
+function announce(text){document.querySelector('#announcement').textContent=text;}
+function notFound(){main.innerHTML=heading('WORKSPACE','Page not found','This record is unavailable.')+'<a class="primary inline" href="#today">Return to Today</a>';}
+function render(){const [route='today',id,jId]=(location.hash.slice(1)||'today').split('/');document.querySelector('#businessName').textContent=state.settings.business;
+  document.querySelector('#navigation').innerHTML=destinations.map(([key,label,icon])=>`<a class="nav-item ${route===key||(key==='relationships'&&route==='relationship')?'selected':''}" ${route===key||(key==='relationships'&&route==='relationship')?'aria-current="page"':''} href="#${key}"><span class="icon" aria-hidden="true">${icon}</span><span class="nav-label">${label}</span></a>`).join('');
+  document.title='BusinessOS · '+(destinations.find(x=>x[0]===route)?.[1]||'Relationship');
+  if(route==='relationship'){relationship(id,jId);}
+  else if(route==='today'){const pending=state.jobs.filter(j=>j.stage<8),next=pending[0]||state.jobs[0];main.innerHTML=heading('YOUR SERVICE BUSINESS','A clear day ahead',`${pending.length} open jobs. Start with the next customer who needs you.`)+`<section class="spotlight"><div><p class="eyebrow">NEXT IN YOUR WORKSPACE</p><h2>${esc(customer(next).name)}</h2><p>${esc(next.issue)}</p></div><a class="primary inline" href="${link(next)}">${M.actions[next.stage]} →</a></section><div class="section-head"><h2>Needs attention</h2><span class="caption">${pending.length} open jobs</span></div>${records(pending,'All sample work is complete.')}<section class="section"><h2>Upcoming service</h2>${records(state.jobs.filter(j=>j.stage===4),'No scheduled visits. Accept a quote to book service.')}</section><section class="section"><h2>Follow-ups</h2>${state.jobs.filter(j=>j.followup).map(j=>`<a class="record" href="${link(j)}">${esc(customer(j).name)}<span>${esc(j.followup)}</span></a>`).join('')||'<p class="caption">No follow-ups planned. Plan next service from a paid job.</p>'}</section>`;}
+  else if(route==='relationships'){main.innerHTML=heading('RELATIONSHIPS','Know the whole story','Customers, their homes and the work you do for them.')+`<label class="search">Find a customer<input id="search" type="search" placeholder="Search name, email or city"></label><div id="customerList"></div>`;const draw=()=>{const q=document.querySelector('#search').value.toLowerCase();const customers=state.customers.filter(c=>[c.name,c.email,...state.locations.filter(l=>l.customerId===c.id).map(l=>l.city)].join(' ').toLowerCase().includes(q));document.querySelector('#customerList').innerHTML=customers.length?customers.map(c=>{const jobs=state.jobs.filter(j=>j.customerId===c.id);return `<a class="record" href="#relationship/${c.id}"><span><strong>${esc(c.name)}</strong><small>${esc(c.email)} · ${esc(place(jobs[0]).city)}</small></span><span class="record-state">${jobs.length} job${jobs.length>1?'s':''}<small>Open relationship →</small></span></a>`;}).join(''):'<div class="empty">No matching customers. Try another name, email or city.</div>';};draw();document.querySelector('#search').addEventListener('input',draw);}
+  else if(route==='work'){main.innerHTML=heading('THE WORK','From enquiry to done','One connected record, through every handoff.')+`<label class="search">Filter work${option('stage',['All work',...M.stages])}</label><div id="workList"></div>`;const draw=()=>{const value=document.querySelector('[name=stage]').value;document.querySelector('#workList').innerHTML=records(state.jobs.filter(j=>value==='All work'||M.stages[j.stage]===value));};draw();document.querySelector('[name=stage]').addEventListener('change',draw);}
+  else if(route==='schedule'){main.innerHTML=heading('SCHEDULE','Make room for good work','Arrival windows and technician assignments, connected to each customer.')+`<div class="section-head"><h2>Booked visits</h2><span class="caption">Toronto time · AM / PM</span></div>${state.jobs.filter(j=>j.appointment&&j.stage>=4&&j.stage<6).sort((a,b)=>a.appointment.date.localeCompare(b.appointment.date)).map(j=>`<a class="record" href="${link(j)}"><span><strong>${esc(j.appointment.date)} · ${j.appointment.window}</strong><small>${esc(j.appointment.technician)} · ${esc(place(j).city)}</small></span><span class="record-state">${esc(customer(j).name)}<small>${M.actions[j.stage]} →</small></span></a>`).join('')||'<div class="empty">No booked visits. Schedule an accepted quote below.</div>'}<section class="section"><h2>Ready to schedule</h2>${records(state.jobs.filter(j=>j.stage===3),'No accepted quotes waiting for a date.')}</section>`;}
+  else if(route==='money'){const t=M.totals(state);main.innerHTML=heading('MONEY','See what the work earns','Synthetic sample totals · all records · CAD before tax.')+`<div class="money-strip">${[['Invoiced',t.invoiced],['Collected',t.collected],['Outstanding',t.outstanding]].map(([label,v])=>`<div><span>${label}</span><strong>${currency(v)}</strong></div>`).join('')}</div><p class="caption">Quoted total: ${currency(t.quoted)}. Quotes are not collected revenue. No payment processing or accounting integration.</p><section class="section"><h2>Invoices & payments</h2>${records(state.jobs.filter(j=>j.invoice),'No invoices prepared yet.')}</section><section class="section"><h2>Estimated direct contribution</h2><p class="caption">Invoice before tax minus estimated direct costs. Excludes overhead and tax.</p>${state.jobs.filter(j=>j.invoice).map(j=>`<a class="record" href="${link(j)}"><span><strong>${esc(customer(j).name)}</strong><small>${esc(j.invoice.id)} · ${j.payment?'Paid':'Unpaid'}</small></span><strong>${M.contribution(j)===null?'Costs unavailable':currency(M.contribution(j))}</strong></a>`).join('')||'<p class="caption">Complete work and prepare an invoice to review contribution.</p>'}</section>`;}
+  else if(route==='settings'){main.innerHTML=heading('WORKSPACE SETTINGS','A business that feels yours','Simple defaults for this synthetic service business.')+`<form id="settingsForm" class="settings-form"><div class="fields">${field('Business name','business',state.settings.business,'text','maxlength="80"')}${field('Default service rate · CAD before tax','rate',state.settings.rate,'number','min="0.01" max="1000000" step="0.01"')}</div><div class="form-footer"><span>Session only; accepted quotes stay unchanged.</span><button class="primary">Save settings</button></div></form><section class="section"><h2>Service team</h2>${state.settings.technicians.map(t=>`<p class="team-member">${esc(t)} <span class="caption">Demo technician</span></p>`).join('')}</section><section class="section"><h2>Prototype boundaries</h2><p>Three synthetic customers. No live emails, payments, user roles or integrations. Changes reset on reload.</p><p class="caption">Team management, service catalog, integration setup and production permissions require further implementation.</p></section>`;document.querySelector('#settingsForm').addEventListener('submit',e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.target));if(!d.business.trim()||Number(d.rate)<=0)return;state.settings.business=d.business.trim();state.settings.rate=Number(d.rate);document.querySelector('#businessName').textContent=state.settings.business;announce('Settings saved for this session.');});}
+  else notFound();
+  if(route==='relationships'){
+    const panel=document.createElement('details');panel.className='new-enquiry';panel.innerHTML=`<summary>+ New enquiry</summary><form id="newEnquiry"><div id="formError" class="error-summary" role="alert" hidden></div><p class="caption">Use synthetic details. An existing email is flagged for review.</p><div class="fields">${field('Customer name','name','','text','maxlength="100"')}${field('Email','email','','email')}${field('City','city','','text','maxlength="100"')}<label>Service request<textarea name="issue" required maxlength="1500"></textarea></label></div><div class="form-footer"><span>Contact and equipment details come during qualification.</span><button class="primary">Create enquiry</button></div></form>`;
+    main.querySelector('.identity').after(panel);panel.querySelector('form').addEventListener('submit',e=>{e.preventDefault();try{const j=M.addEnquiry(state,Object.fromEntries(new FormData(e.target)));location.hash=link(j);announce('Enquiry created. Qualify the lead.');}catch(error){showError(e.target,error);}});
   }
-  saved = Object.freeze({...data});
-  const summary = document.querySelector('#qualificationSummary'); summary.replaceChildren();
-  const rows = [
-    ['Customer',saved.name],['Contact',saved.email + ' · ' + saved.phone],
-    ['Location',saved.address + ', ' + saved.city + ', ON ' + saved.postal.toUpperCase()],
-    ['Service',saved.service + ' · ' + saved.count + (Number(saved.count)===1?' fireplace':' fireplaces')],
-    ['Request',saved.issue],['Equipment',[saved.fuel,saved.brand,saved.model,saved.room].filter(Boolean).join(' · ') || 'Not yet recorded']
-  ];
-  for (const [label,value] of rows) {
-    const dt = document.createElement('dt'), dd = document.createElement('dd');
-    dt.textContent = label; dd.textContent = value; summary.append(dt,dd);
-  }
-  let entry = document.querySelector('#qualifiedEvent');
-  if (!entry) {
-    entry = document.createElement('li'); entry.id = 'qualifiedEvent';
-    const title = document.createElement('strong'), detail = document.createElement('span');
-    title.textContent = 'Enquiry qualified'; detail.textContent = 'Details saved · this session only';
-    entry.append(title,detail); document.querySelector('#timeline').append(entry);
-  }
-  document.querySelector('h1').firstChild.textContent = saved.name;
-  document.querySelector('.topbar strong').textContent = saved.name;
-  document.querySelector('.context span').textContent = saved.service;
-  document.querySelector('.context span:nth-child(2)').textContent = saved.city + ', Ontario';
-  document.querySelector('#stage').textContent = 'Ready for quote';
-  document.querySelector('#actionTitle').textContent = 'Qualification complete';
-  document.querySelector('#actionIntro').textContent = 'The next step is quote preparation.';
-  form.hidden = true; document.querySelector('#quote').hidden = false;
-  announcement.textContent = 'Qualification saved. Ready for quote preparation. No quote has been created.';
-  document.querySelector('#actionTitle').focus();
-});
-document.querySelector('#edit').addEventListener('click',()=>{
-  form.hidden = false; document.querySelector('#quote').hidden = true;
-  document.querySelector('#actionTitle').textContent = 'Review qualification';
-  document.querySelector('#actionIntro').textContent = 'Update the details, then save to continue.';
-  form.elements.service.focus();
-});
+  main.querySelector('h1')?.focus({preventScroll:true});
+}
+document.querySelector('#pin').addEventListener('click',()=>{const pin=document.querySelector('#pin'),pinned=document.querySelector('.sidebar').classList.toggle('pinned');pin.setAttribute('aria-pressed',String(pinned));pin.setAttribute('aria-label',pinned?'Unpin navigation':'Pin navigation');pin.querySelector('.nav-label').textContent=pinned?'Unpin navigation':'Pin navigation';});
+window.addEventListener('hashchange',render);render();

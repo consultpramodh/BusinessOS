@@ -1,0 +1,32 @@
+const assert=require('node:assert/strict');
+const M=require('../model.js');
+const state=M.seed(),j=state.jobs[0];
+assert.equal(state.jobs.filter(j=>j.customerId==='c1').length,2);
+assert.deepEqual(M.totals(state),{quoted:96500,invoiced:64000,collected:38000,outstanding:26000});
+const data={name:'Sarah Mitchell',email:'sarah.mitchell@example.com',phone:'416-555-0142',address:'123 Example Lane',city:'Mississauga',postal:'L4Y 1A1',service:'Fireplace repair',issue:'Pilot light fails.',count:'1'};
+for(const invalid of [{email:'bad'},{phone:'abc4165550142'},{postal:'111111'},{count:'1.5'},{name:' '}]){
+ const before=JSON.stringify(state);assert.throws(()=>M.transition(state,'j1',{...data,...invalid}));assert.equal(JSON.stringify(state),before);
+}
+M.transition(state,'j1',data);assert.equal(j.stage,1);
+assert.throws(()=>M.transition(state,'j1',{amount:'0'}));assert.equal(j.stage,1);
+M.transition(state,'j1',{amount:'380.25'});assert.equal(j.quote.amount,38025);
+M.transition(state,'j1');assert.equal(j.stage,3);
+for(const d of [{date:'2026-02-30',window:'AM',technician:'Alex Chen'},{date:'2000-01-01',window:'AM',technician:'Alex Chen'},{date:'2099-01-01',window:'all day',technician:'Alex Chen'}])assert.throws(()=>M.transition(state,'j1',d));
+state.jobs[1].appointment.date='2099-01-01';
+assert.throws(()=>M.transition(state,'j1',{date:'2099-01-01',window:'AM',technician:'Alex Chen'}));assert.equal(j.stage,3);
+M.transition(state,'j1',{date:'2099-01-01',window:'PM',technician:'Morgan Lee'});assert.equal(j.appointment.technician,'Morgan Lee');
+M.transition(state,'j1');assert.equal(j.stage,5);
+const before=JSON.stringify(state);assert.throws(()=>M.transition(state,'j1',{notes:'Completed',labor:'150',materials:'',other:'0'}));assert.equal(JSON.stringify(state),before);
+M.transition(state,'j1',{notes:'Pilot assembly serviced.',labor:'150',materials:'20.25',other:'0'});
+assert.equal(M.contribution(j),null);
+M.transition(state,'j1');assert.equal(j.invoice.amount,38025);assert.equal(M.contribution(j),21000);
+assert.equal(M.totals(state).outstanding,64025);
+M.transition(state,'j1');assert.equal(M.totals(state).collected,76025);assert.equal(M.totals(state).outstanding,26000);
+assert.throws(()=>M.transition(state,'j1'));assert.equal(j.events.length,9);
+assert.equal(state.jobs[3].stage,8);assert.equal(M.contribution(state.jobs[3]),21000);
+assert.equal(M.contribution({...j,costs:{labor:50000,materials:0,other:0}}),-11975);
+for(const value of ['',null,'NaN','-1','1.001','Infinity','1000001'])assert.throws(()=>M.money(value));
+assert.equal(M.money('0.29'),29);
+assert.throws(()=>M.addEnquiry(state,{name:'Duplicate',email:data.email,city:'Toronto',issue:'Test'}));
+const newJob=M.addEnquiry(state,{name:'Test Customer',email:'test@example.com',city:'Toronto',issue:'Annual service'});assert.equal(newJob.stage,0);assert.equal(state.locations.find(l=>l.id===newJob.locationId).address,'');
+console.log('PASS: lifecycle, shared identity, validation atomicity, conflicts, dates, cents, unknown/negative costs, payment idempotency, duplicate/new enquiry.');

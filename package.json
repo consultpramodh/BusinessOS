@@ -1,0 +1,6 @@
+{
+  "name": "businessos-prototype",
+  "private": true,
+  "scripts": {"test": "node tests/model.cjs && node tests/ui.cjs"},
+  "devDependencies": {"linkedom": "0.18.13"}
+}

@@ -3,6 +3,14 @@
 **Status:** Planning baseline · 2026-10-17
 **Authority:** This document defines build order. GitHub Issues track work; docs/CURRENT_STATE.md records verified completion. A roadmap entry is not evidence of implementation.
 
+## Current priority — approved whole-system design correction
+2026-10-17, Issue #7: Design the full product via PRODUCT_ARCHITECTURE.md and implement a connected synthetic six-destination prototype. This supersedes reading the initial qualification milestone as the entire scope. Current model/DOM-tested work covers the main Phases 1–2 synthetic journey; it does not close browser/accessibility or operator-validation gates. The older phase list below remains the production-readiness dependency reference.
+1. Full navigation, entity model and journey specification — implemented.
+2. Shared-state connected prototype across Today/Relationships/Work/Schedule/Money/Settings — implemented, model/DOM tests pass.
+3. Browser/mobile/accessibility and operational exception audit — next; controller unavailable this session.
+4. Operator validation and next depth features — pending.
+5. Production foundations — conditional, unchanged.
+
 ## Operating rule
 Build the smallest complete vertical slice before expanding horizontally. A phase starts only when its dependencies and exit gate are met. UI/UX quality, accessibility, truthful metrics and minimal engineering apply at every phase. Do not start backend, authentication or integrations merely because they appear later in this roadmap.
 

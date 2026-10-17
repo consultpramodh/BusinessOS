@@ -35,3 +35,6 @@ Existing files: index.html, styles.css, script.js. Improve incrementally rather 
 
 ## Approved relationship workspace refinement — 2026-10-17
 Customer relationship is the default surface; Sarah Mitchell fireplace-service scenario is synthetic reference. Desktop rail is icon-only, expands on hover or focus-within and supports explicit pin/unpin. Mobile presents labelled navigation without hover dependence. Prioritize contextual primary action over disconnected modules. Qualification uses native form controls, optional equipment disclosure, inline errors and focus recovery, then a saved summary. No implied quote creation from qualification save.
+
+## Whole-system navigation correction — 2026-10-17
+Today is the global entry; Relationships owns the customer workspace. Sidebar destinations are Today, Relationships, Work, Schedule, Money, Settings. History stays inside the relationship/job, never a redundant top-level destination. All operational screens reuse shared records and contextual links. Responsive styling is implemented but current expanded browser QA is pending; do not reuse qualification-only screenshots as proof.
