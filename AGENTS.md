@@ -26,3 +26,6 @@ GitHub main and Issues are the source of truth. Re-read them at the start of eve
 
 ## Version-controlled prompts
 Read prompts/README.md and prompts/MASTER_PROJECT_PROMPT.md at session start; read prompts/UI_UX_SYSTEM.md for UI work, relevant prompts/features/*.md for feature work, and prompts/VERIFICATION.md before completion claims. Update prompts when accepted behavior changes, not on every cosmetic edit.
+
+## Execution order
+Read docs/FEATURE_EXECUTION_ROADMAP.md before selecting the next feature. Do not treat deferred phases as approved scope; respect phase exit gates and dependencies.
