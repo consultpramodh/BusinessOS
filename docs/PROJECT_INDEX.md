@@ -17,3 +17,11 @@ Repository: https://github.com/consultpramodh/BusinessOS
 **Read order for a new chat:** AGENTS → PROJECT_INDEX → CURRENT_STATE → TASKS → relevant source → Issues/commits. Never rely solely on memory of earlier chats.
 
 **Ownership:** GitHub Issues = granular task discussion; TASKS.md = short checklist; CURRENT_STATE.md = factual snapshot; CHANGELOG.md = what changed; DECISIONS.md = why.
+
+## Prompt library
+- [Prompt index](../prompts/README.md)
+- [Master execution prompt](../prompts/MASTER_PROJECT_PROMPT.md)
+- [Feature template](../prompts/FEATURE_TEMPLATE.md)
+- [UI/UX standards](../prompts/UI_UX_SYSTEM.md)
+- [Verification](../prompts/VERIFICATION.md)
+- [Session handoff](../prompts/SESSION_HANDOFF.md)
