@@ -27,3 +27,6 @@ Run the manual checklist in docs/demo-limitations.md in a real browser; fix defe
 
 ## How to update this file
 After each meaningful implementation, record what was actually committed and tested, what remains unverified, known defects, and the next actionable step. Do not substitute intentions for completed work.
+
+## Execution sequence
+The authoritative planned feature order is docs/FEATURE_EXECUTION_ROADMAP.md. Phase 0 browser QA and UI foundation are next; later phases are conditional, not completed.
