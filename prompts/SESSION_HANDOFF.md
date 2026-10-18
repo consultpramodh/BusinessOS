@@ -1,10 +1,11 @@
-# New session / handoff prompt
+# Resume BusinessOS from verified source
 
-Continue development of BusinessOS from the **live GitHub repository**, not from prior chat memory alone:
-https://github.com/consultpramodh/BusinessOS
+Repository https://github.com/consultpramodh/BusinessOS · main. Read live AGENTS, PROJECT_INDEX, CURRENT_STATE, FEATURE_EXECUTION_ROADMAP, DECISIONS, CHANGELOG, TASKS; prompt index/master/template/UI/verification; relevant feature contracts and source/Issues; recent commits. Do not rely on remembered implementation claims.
 
-Read docs/PRODUCT_ARCHITECTURE.md and prompts/features/CONNECTED_WORKSPACE.md. User approved the whole BusinessOS design, with six connected destinations. Do not collapse the product back to Sarah's qualification screen. Read CURRENT_STATE for actual implementation/test limits and the existing Sites project; reuse it, preserve its audience and deliberately synchronize canonical frontend changes.
+The user rejected the delivered frontend direction. The 2026-10-18 complete master, reconciliation, inventory, independent domain/action model and recovered visual-reference review control current work. A–N capabilities do not equal sidebar pages. Six v1 routes are historical implementation, not approved full-product design. Sarah is a relationship with simultaneous enquiry/quote/job/invoice/reminder records, not one advancing customer stage.
 
-First read AGENTS.md, docs/PROJECT_INDEX.md, docs/CURRENT_STATE.md, TASKS.md, docs/DECISIONS.md, prompts/MASTER_PROJECT_PROMPT.md, relevant prompts/features/*.md, and the relevant GitHub Issues and source files. Inspect recent commits on main. Report the actual latest committed state, open work, and verification gaps. Do not assume the repository is private; check visibility if relevant.
+New domain/relationship.cjs and OpenUI experiment are isolated and tested, NOT wired to the deployed Site. Next: reference-aligned New enquiry → Qualify lead workspace with draft preservation and real desktop/mobile/keyboard evidence, then versioned quote acceptance/technical-review branch. Run npm ci with install scripts disabled and npm test; consult current state for exact dependency/evidence limits. Don't claim visual success from DOM/parser tests.
 
-Operate with 4H1W, adversarial review, minimal engineering and Apple/Wealthsimple-inspired UI/UX quality. Do not introduce frameworks, infrastructure, AI or additional features without a justified user outcome and acceptance criteria. Execute the smallest valuable next step, verify what can be verified, and update docs/CURRENT_STATE.md, docs/CHANGELOG.md and relevant tasks in the same work session. Distinguish implementation from test evidence. If GitHub is unavailable, ask for access rather than pretending to have the latest version.
+Read OPENUI_EVALUATION before extending OpenUI: typed display bridge, not business authority; no live model/renderer/backend currently. VIDEO_GITHUB_REFERENCES preserves exact video-description links; do not bulk-install tools. Existing Site/project/source mapping is in CURRENT_STATE; follow Sites skill and preserve audience before any future deployment. No automatic GitHub sync or background monitoring implied.
+
+After each milestone update authoritative specification if requirements change, current state/changelog/tasks/Issue and decision rationale; commit with safe expected-head protection. Leave future capabilities deferred until evidence/dependencies justify them. Production data/security/persistence/communications are separately gated.

@@ -20,6 +20,7 @@ Use the precise level for each material claim.
 - Verifier: What exact observable result would prove or falsify success?
 
 ## Mandatory checks
+- Track specified, contract-designed, implemented, automated-tested, browser-tested, user-validated and production-ready independently. User rejection is not overturned by tests. Inspect simultaneous enquiry/quote/job/invoice/reminder, historical snapshots, stale versions, duplicate and conflicting event IDs, technical-review branch, action reason/owner/permission and source financial lineage. Generated UI must not alter domain facts/eligibility/authorization.
 - 4H1W coverage, including actual user, trigger, prerequisites and failure modes.
 - Demo vs production distinction; synthetic vs real data.
 - Responsive 360px and 1440px behavior; keyboard, focus, semantic controls.

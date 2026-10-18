@@ -1,5 +1,8 @@
 # UI/UX execution prompt — calm, precise, effortless
 
+## Controlling correction — 2026-10-18
+User rejected the delivered UI direction. Prior six-destination guidance below describes historical implementation, not approved final navigation. Follow the complete master, CUSTOMER_WORKSPACE.md and VISUAL_REFERENCE_REVIEW.md. Original scheduler and enquiry concepts have been recovered and inspected; retain dark icon-first rail, strong persistent identity, dominant contextual work and compact support. Do not transplant fake availability/conversion statistics, decorative banners or a universal customer stage. Model/DOM tests are not visual approval. One primary action per selected task context, not one universal action for all of Sarah's parallel concerns.
+
 ## Design intent
 BusinessOS should feel as calm and legible as a high-quality personal finance product and as predictable as a polished native operating-system interface. Inspiration: Wealthsimple's information restraint and Apple's interaction quality; do not clone screens, brand marks, illustrations, icons or proprietary styling. Prioritize clarity and accessibility over aesthetic imitation.
 

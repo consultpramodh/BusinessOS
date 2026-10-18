@@ -3,6 +3,7 @@
 **Canonical source:** https://github.com/consultpramodh/BusinessOS (default branch: main). Never assume a previous chat reflects the latest commit.
 
 ## At the beginning of each BusinessOS work session
+Read the 2026-10-18 controlling master and docs/RECONCILIATION_20261018.md. User rejected the delivered frontend direction; six routes or passing DOM tests are not approved product design. Capabilities A–N are not automatically navigation pages. Recover references via docs/VISUAL_REFERENCE_REVIEW.md, follow inventory and current roadmap, and retain independent record states/snapshots. Experimental domain/OpenUI code is not wired into the Site.
 1. Read README.md, docs/PROJECT_INDEX.md, docs/CURRENT_STATE.md, TASKS.md, and docs/DECISIONS.md from GitHub main.
 2. Inspect the relevant source files and open GitHub issues before making a change. Check the current commit/branch; do not overwrite concurrent edits.
 3. State which facts are verified from the repository versus assumptions. If GitHub access fails, say so and do not pretend the files are current.

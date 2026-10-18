@@ -1,47 +1,37 @@
-# BusinessOS product architecture
+# BusinessOS architecture · v2
 
-Approved whole-system prototype scope · 2026-10-17 · Issue #7.
-Design the complete experience; implement incrementally. The first qualification slice never represented the whole product. This document supersedes that narrower interpretation of the master prompt.
+2026-10-18 · Issue #8 · reconciled to user's complete master specification.
+Master: ../prompts/MASTER_PROJECT_PROMPT.md. Historical six-route architecture: archive/PRODUCT_ARCHITECTURE_20261017.md. Its existence and code tests never established user approval of the delivered design.
 
-## Operator and purpose
-Service coordinator and owner of a small service business. Keep the customer relationship intact from enquiry through service, payment and return service. Sarah Mitchell's synthetic fireplace journey is the reference, not the only customer or a hardcoded product boundary.
-
-## Navigation and ownership
-| Destination | Owns the view | Primary next step | Shared source |
+## Capability ownership, not a menu
+| Capability | Owns | Receives → produces | Authoritative specification |
 |---|---|---|---|
-| Today | Open work and scheduled visits, follow-ups | Open the next relevant job | Jobs, appointments, follow-ups |
-| Relationships | Searchable customer directory and relationship workspace | Contextual action on selected job | Customer, location, equipment, jobs, events |
-| Work | All work and stage filters | Open a job | Same jobs, no copied state |
-| Schedule | Booked windows and accepted work awaiting booking | Schedule or start service | Job appointment |
-| Money | Invoiced, collected, outstanding, estimated contribution | Open invoice-linked job | Job quote, invoice, payment, costs |
-| Settings | Business name, rate defaults, team reference | Save session defaults | Settings |
+| A Command centre | Attention and accountable decisions | Independent records/action context → role-filtered attention view | COMMAND_CENTRE.md |
+| B Relationships | Customer/contact/location/asset continuity | IDs/history → persistent identity and related context | CUSTOMER_RELATIONSHIPS.md |
+| C Acquisition | Sources/matching/enquiry qualification | Incoming demand → owned qualified scope or review | ENQUIRY_MANAGEMENT.md |
+| D Quotes | Versioned commercial offer/approval | Qualified scope/catalog → immutable accepted terms | QUOTES_ESTIMATES.md |
+| E Scheduling | Visits/resources/customer commitments | Eligible scope/availability → appointment/assignments | SCHEDULING_DISPATCH.md |
+| F Execution | Preparation/work/closeout/exceptions | Visit/scope → work records/time/materials/review | FIELD_EXECUTION.md |
+| G Billing | Receivables/allocations/reconciliation | Billable scope → invoice/balance/receipt request | BILLING_PAYMENTS.md |
+| H Economics | Estimate/actual direct contribution | Invoice/cost lineage → transparent job economics | JOB_ECONOMICS.md |
+| I Inventory | Catalog/stock/reservations/purchasing | Work demand → resource commitments/consumption cost | INVENTORY_PURCHASING.md |
+| J Employees | Skills/availability/work resources | Team policy → eligible assignment/time cost | EMPLOYEES_RESOURCES.md |
+| K Engagement | Recipient/purpose/consent/delivery | Business event → deduplicated communication lifecycle | COMMUNICATIONS_RETENTION.md |
+| L Automation | Rule and integration execution | Trigger/contracts → observable authorized actions | AUTOMATION_INTEGRATIONS.md |
+| M Reporting | Metric lineage and decisions | Versioned operational/financial facts → defined measures | REPORTING_INTELLIGENCE.md |
+| N Administration | Organization/industry configuration | Operator policy → validated defaults/permissions | ADMIN_CONFIGURATION.md |
 
-Narrow desktop sidebar expands on hover/focus and pins open; explicit labelled mobile links. History is inside a relationship. Quotes and invoices are contextual records, not redundant top-level modules.
+Specs above live under prompts/features/. Foundation and action contracts: DOMAIN_FOUNDATION.md and ACTION_CONTEXT.md. Detailed subfeature inventory and build/defer boundaries: FEATURE_INVENTORY.md. The A–N list is not fourteen sidebar pages. Six previously implemented routes are historical views, not the definition of the business.
 
-## Entity relationships
-Customer 1→many Locations; Location 1→many Equipment; Customer 1→many Jobs. Jobs reference customer, location and equipment IDs, and contain prototype quote, appointment, invoice, payment, costs and chronological events. Different jobs for one customer have independent stages. Financial entities are embedded for this prototype and should become explicit records if revisions, deposits, partial invoices/payments or persistent audit requirements are approved.
+## Record architecture
+Organization owns IDs. Customer can be individual or organization; contacts are separate. Location belongs to customer; equipment belongs to location. Enquiry/opportunity and commercial records remain independent. QuoteVersion holds scope/price/tax/terms/address snapshot; accepted version is immutable. Quote can fund several jobs; job can have several visits and work/cost records. Invoice/job and payment/invoice allocations may be many-to-many. Interaction/document/follow-up/event links preserve relevant record identity. See DOMAIN_MODEL.md for explicit cardinalities and minimum implemented slice.
 
-## Reference journey and contextual actions
-| Job state | Action | Prerequisite / result |
-|---|---|---|
-| New enquiry | Qualify lead | Validate contact/location/service; update shared records |
-| Qualified | Prepare quote | Positive price, integer CAD cents |
-| Quote awaiting response | Record acceptance | Demo acceptance; quote revision available before acceptance |
-| Quote accepted | Schedule service | Valid future/today Toronto date, AM/PM, technician, no window collision |
-| Scheduled | Start service | Appointment exists |
-| In progress | Complete service | Notes and all three direct cost inputs; unknown is not zero |
-| Service completed | Prepare invoice | Accepted quote supplies before-tax amount |
-| Invoiced | Record demo payment | Full outstanding synthetic invoice only |
-| Paid | Review contribution | Invoice minus estimated direct costs; optionally plan follow-up |
+## Interaction architecture
+Workspace has persistent customer identity plus selected location/task, a dominant contextual work area and progressive supporting records/history. The customer is never labelled with one universal commercial/service/payment stage. Actions explain reason, responsible owner, permissions, deadlines and blockers. Simultaneous actions are ranked transparently; operator can inspect another task without discarding enquiry drafts. Context evaluator is read-only; commands separately validate versions/eligibility/authority and append history. See ACTION_CONTEXT.md and CUSTOMER_WORKSPACE.md.
 
-## Whole-system design inventory
-Implemented prototype: all six destinations, searching/filtering, new customer enquiry with duplicate email warning, contextual journey, linked totals/history, settings defaults, follow-up date. Sarah has a new job and a historical paid job. Separate retained legacy dashboard is not in main navigation.
-Next design depth: enquiries for existing customers, editing and duplicate reconciliation; multiple equipment selection; quote line items/rejection/expiry; rescheduling/cancellation; return visits; attachments/communications; payment exceptions; team/catalog editing. These are designed boundaries and backlog, not implemented capabilities.
-Conditional production: durable storage, authentication/roles/tenant isolation, audit logs, backups, messaging/calendar/accounting integrations. No backend infrastructure approved by this prototype scope.
+## Operational contracts
+Reference journey: SARAH_REFERENCE_JOURNEY.md. Event/command envelope and exception contracts: INTEGRATION_CONTRACTS.md. Accepted quote plus unresolved technical prerequisite produces a review action, not an appointment. Completion is separate from billability approval; issued invoice separate from confirmed payment and allocation. Communication can be queued/failed/delivered independently of a successful work transition.
 
-## 4H1W and acceptance
-What: coherent system with linked records. Why: eliminate disconnected demo modules. Who: coordinator/owner, synthetic roles only. How: common model, contextual actions and derived operational/financial views; failures preserve inputs. When: on explicit operator actions; reload resets demo.
-Acceptance: each global route renders; every record link returns to its relationship; Sarah can progress from enquiry to payment; invalid actions leave state unchanged; schedule and money derive from the same records; several customers/jobs can be navigated independently; malformed text is escaped; mobile labels require no hover.
-
-## Adversarial review
-Risk: broad navigation can imply mature modules. Mitigation: useful bounded screens and truthful session/demo labelling, explicit incomplete depth above. Risk: simple linear stage cannot model real operational exceptions. Keep production claims blocked; test rejection/cancellation/deposit scenarios before real deployment. Risk: aesthetics can hide no commercial value. Validate task completion and handoff errors with an operator; no time-savings or ROI claim yet.
+## Scope and migration
+Existing frontend: browser-memory, hardcoded fireplace assumptions, embedded financial/visit records and stage index. Preserve it as historical implementation, not a release target to broaden. New foundation: dependency-free experimental domain arrays, qualification snapshots/versioned command and deterministic multi-record action evaluator; not wired to the Site yet. No database/schema migration/integration/backend introduced.
+Next: migrate Sarah's qualification workspace to foundation, preserving approved visual composition and recoverable drafts; then introduce versioned quote acceptance and technical-review branch before scheduling. Operational expansion remains evidence-ordered. Production security/persistence/audit/recovery requires independent tests and operator evidence.

@@ -1,42 +1,28 @@
-# Project index — start here
+# BusinessOS project index
 
-Repository: https://github.com/consultpramodh/BusinessOS
+Canonical repository: https://github.com/consultpramodh/BusinessOS · main.
+Start: AGENTS → this index → current state → master/reconciliation → roadmap/tasks → relevant spec/source/Issues/recent commits. Do not treat prior conversation or deployed Site as current source of truth.
 
-| Need | Read |
+| Need | Authoritative file |
 |---|---|
-| Understand the product | [README](../README.md) |
-| See current reality / next action | [CURRENT_STATE](CURRENT_STATE.md) |
-| See current tasks | [TASKS](../TASKS.md) and [GitHub Issues](https://github.com/consultpramodh/BusinessOS/issues) |
-| See why decisions were made | [DECISIONS](DECISIONS.md) |
-| Review recent updates | [CHANGELOG](CHANGELOG.md) and [GitHub commits](https://github.com/consultpramodh/BusinessOS/commits/main/) |
-| Follow assistant operating rules | [AGENTS](../AGENTS.md) |
-| Follow UI/UX principles | [product principles](product-principles.md) |
-| Understand demo caveats | [demo limitations](demo-limitations.md) |
-| View frontend | [index.html](../index.html), [styles.css](../styles.css), [script.js](../script.js) |
+| Current facts, test evidence, next task, Site identity | [CURRENT_STATE](CURRENT_STATE.md) |
+| Complete controlling product requirements | [Master v2](../prompts/MASTER_PROJECT_PROMPT.md) |
+| What changed and why | [Reconciliation](RECONCILIATION_20261018.md), [decisions](DECISIONS.md), [changelog](CHANGELOG.md) |
+| A–N scope and integration ownership | [Product architecture](PRODUCT_ARCHITECTURE.md) |
+| All feature packages, subcapability inventory and dependencies | [Feature inventory/DAG](FEATURE_INVENTORY.md) |
+| Immediate build order and gates | [Roadmap](FEATURE_EXECUTION_ROADMAP.md), [tasks](../TASKS.md) |
+| IDs/cardinality/history/minimum slice | [Domain model](DOMAIN_MODEL.md) |
+| Identity/task/support interaction | [Customer workspace](CUSTOMER_WORKSPACE.md) |
+| Actual visual concepts and exclusions | [Visual reference review](VISUAL_REFERENCE_REVIEW.md) |
+| Shared event/command envelope and dependencies | [Integration contracts](INTEGRATION_CONTRACTS.md) |
+| 18-step trigger/data/owner/failure/finance/verification map | [Sarah journey](SARAH_REFERENCE_JOURNEY.md) |
+| Feature definitions and A–Q standard | [Prompt index](../prompts/README.md), [template](../prompts/FEATURE_TEMPLATE.md) |
+| OpenUI source, installed versions, fit and actual spike | [OpenUI evaluation](OPENUI_EVALUATION.md) |
+| Supplied video's exact 12 GitHub links and provenance | [Video repository extraction](VIDEO_GITHUB_REFERENCES.md) |
+| Design/evidence/continuity instructions | [UI/UX](../prompts/UI_UX_SYSTEM.md), [verification](../prompts/VERIFICATION.md), [handoff](../prompts/SESSION_HANDOFF.md) |
+| Previous interpretation for traceability | [Archived architecture](archive/PRODUCT_ARCHITECTURE_20261017.md), [master](archive/MASTER_PROJECT_PROMPT_20261017.md), [roadmap](archive/FEATURE_EXECUTION_ROADMAP_20261017.md) |
 
-**Read order for a new chat:** AGENTS → PROJECT_INDEX → CURRENT_STATE → TASKS → relevant source → Issues/commits. Never rely solely on memory of earlier chats.
+## Source ownership
+New isolated foundation: domain/relationship.cjs; tests/relationship.cjs. OpenUI experiment: experiments/openui/context-library.cjs; tests/openui.cjs. Existing rejected-direction frontend: index.html, styles.css, os.css, script.js, model.js; regression tests/model.cjs and tests/ui.cjs. Historical earlier dashboard: lifecycle.*; first-slice browser evidence tests/archive/qualification-v1.cjs. No new foundation UI integration yet.
 
-**Ownership:** GitHub Issues = granular task discussion; TASKS.md = short checklist; CURRENT_STATE.md = factual snapshot; CHANGELOG.md = what changed; DECISIONS.md = why.
-
-## Prompt library
-- [Prompt index](../prompts/README.md)
-- [Master execution prompt](../prompts/MASTER_PROJECT_PROMPT.md)
-- [Feature template](../prompts/FEATURE_TEMPLATE.md)
-- [UI/UX standards](../prompts/UI_UX_SYSTEM.md)
-- [Verification](../prompts/VERIFICATION.md)
-- [Session handoff](../prompts/SESSION_HANDOFF.md)
-
-## Build sequence
-- [Dependency-ordered feature roadmap](FEATURE_EXECUTION_ROADMAP.md) — phases, gates, priorities and next three actions.
-- [Whole-product architecture](PRODUCT_ARCHITECTURE.md) — six destinations, shared entities, journey and explicit backlog. Read this before interpreting a feature slice as the whole product.
-- [Connected workspace contract](../prompts/features/CONNECTED_WORKSPACE.md) — current implementation requirements (#7).
-
-## Current frontend paths
-- Connected app shell, routing and views: index.html, styles.css, os.css, script.js
-- Shared synthetic records, transitions and financial derivations: model.js
-- Preserved legacy dashboard: lifecycle.html, lifecycle.css, lifecycle.js
-- Qualification contract: prompts/features/LEAD_QUALIFICATION.md
-- Current tests: tests/model.cjs and tests/ui.cjs (model/DOM only); historical browser evidence: tests/archive/qualification-v1.cjs
-
-## Existing working Site
-https://businessos-relationship.pramodh7.chatgpt.site (owner-private). Existing identity and deliberate update procedure are in CURRENT_STATE.md. GitHub remains canonical; Site source is a separate synchronized checkout, with no automatic sync.
+Issues track granular work; roadmap controls sequencing; specifications define behavior; current state records evidence; decisions preserve rationale; changelog records milestones. User's rejection and later master clarification override old design approval assumptions.

@@ -1,6 +1,12 @@
 {
   "name": "businessos-prototype",
   "private": true,
-  "scripts": {"test": "node tests/model.cjs && node tests/ui.cjs"},
-  "devDependencies": {"linkedom": "0.18.13"}
+  "scripts": {
+    "test": "node tests/model.cjs && node tests/ui.cjs && node tests/relationship.cjs && node tests/openui.cjs"
+  },
+  "devDependencies": {
+    "@openuidev/lang-core": "1.0.1",
+    "linkedom": "0.18.13",
+    "zod": "4.6.7"
+  }
 }

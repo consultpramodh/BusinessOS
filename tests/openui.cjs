@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict');const D=require('../domain/relationship.cjs'),UI=require('../experiments/openui/context-library.cjs');
+const actor={id:'office',organizationId:'org-demo',permissions:['relationship.view','enquiry.qualify','payment.review','schedule.edit','communication.draft']};
+const context=D.actionsForCustomer(D.fixture(),'sarah',actor,'2026-10-18T12:00:00Z'),program=UI.programFor(context);
+const result=UI.parseApproved(program,context);assert.equal(result.root.props.actions.length,context.actions.length);
+assert.throws(()=>UI.parseApproved(program.replace('Resolve overdue invoice','Pay immediately'),context),/domain decision/);
+assert.throws(()=>UI.parseApproved(program.replace('"sarah"','"other"'),context),/context mismatch/);
+assert.throws(()=>UI.parseApproved('root = Unknown("x")',context));
+assert.throws(()=>UI.parseApproved(program+'\nextra = Query("send_payment", {})',context));
+const blocked=D.fixture();blocked.quotes[0].technicalReview='required';const b=D.actionsForCustomer(blocked,'sarah',actor,'2026-10-18T12:00:00Z'),bp=UI.programFor(b);assert.ok(UI.parseApproved(bp,b).root);assert.throws(()=>UI.parseApproved(bp.replace('false','true'),b));
+console.log('PASS: real OpenUI 1.0.1 parser with BusinessOS component schema; correct context accepted; forged/missing/unknown/mutating/blocked overrides rejected. No renderer/model call.');

@@ -1,5 +1,7 @@
 # Connected BusinessOS workspace — Issue #7
 
+Historical implemented prototype; user rejected delivered direction. Superseded as design authority by the 2026-10-18 master, PRODUCT_ARCHITECTURE, CUSTOMER_WORKSPACE and current feature inventory. Preserve this file as evidence of what v1 attempted, not approval to extend its six routes or stage-index model. New foundation/OpenUI experiments are not wired into it.
+
 Status: implemented prototype; model/DOM tests run, browser layout QA pending. Approved 2026-10-17.
 Read docs/PRODUCT_ARCHITECTURE.md first. Whole-system design and phased implementation are separate responsibilities. Do not substitute one customer's form for the entire operating system.
 

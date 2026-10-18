@@ -2,6 +2,15 @@
 
 Meaningful changes only; commits remain the detailed history.
 
+## 2026-10-18 — Master reconciliation and independent context foundation
+- Recorded user rejection of delivered direction; reconciled complete master v2 without hiding prior decisions. Archived earlier master/architecture/roadmap; added A–N inventory, 17 A–Q feature-package contracts, dependency DAG and precise scope/evidence boundaries.
+- Recovered and inspected three original Sarah visual concepts; documented useful identity/task/support composition and unsupported content excluded.
+- Defined independent-record/cardinality/snapshot model, integration envelope, contextual workspace and Sarah's 18-step transition/failure/communication/finance map.
+- Implemented isolated versioned enquiry qualification/snapshots/audit and deterministic simultaneous-record action evaluator; legacy UI remains unchanged.
+- Added real OpenUI 1.0.1 custom component/parser bridge with host domain validation; development-only, no renderer/model/server. Pinned dependencies and lockfile; disabled installation scripts/telemetry for setup.
+- Extracted 12 exact GitHub links directly from supplied YouTube description and verified repository identities; documented relevance without installing video tools.
+- All four automated model/DOM/domain/parser suites pass; no new visual/browser/device/assistive-technology or user-validation claims. No Site deployment.
+
 ## 2026-10-17
 - Initialized repository documentation and initial GitHub issues.
 - Committed a static, responsive dashboard prototype with synthetic data and job details.

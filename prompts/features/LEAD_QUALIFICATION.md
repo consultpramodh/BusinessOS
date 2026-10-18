@@ -1,5 +1,7 @@
 # Enquiry qualification — approved slice
 
+Historical specification. Current authority: ENQUIRY_MANAGEMENT.md, DOMAIN_FOUNDATION.md and CUSTOMER_WORKSPACE.md. 'Approved slice' refers to earlier scope, not approval of the delivered frontend. Do not infer current UX acceptance from its title.
+
 Historical qualification-only slice. Current whole-system contract: CONNECTED_WORKSPACE.md. Shared qualification now leads to functional demo quote preparation; reference current state and tests rather than the old quote-empty-state acceptance criterion below.
 Issue #6 · 2026-10-17. Synthetic Sarah Mitchell scenario; no customer validation claimed.
 

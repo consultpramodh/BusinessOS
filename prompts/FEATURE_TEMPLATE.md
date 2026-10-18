@@ -1,35 +1,36 @@
-# Feature specification template
+# Feature specification — <name>
 
-**Feature:** <name>  
-**GitHub Issue:** <link>  
-**Status:** proposed / approved / implemented / verified  
-**Owner and target user:** <roles>  
-**Last updated:** <date>
-
-## 1. User problem and evidence
-Describe the observed job-to-be-done, existing workaround, frequency, impact, and source of evidence. Label interviews, analytics, desk research and assumptions distinctly. What does failure cost the user?
-
-## 2. 4H1W decision gate
-- WHAT exactly changes for the user? Define the smallest meaningful outcome and non-goals.
-- WHY is it valuable now? Why not use an existing screen, manual process or third-party tool?
-- WHO can view, create, modify and approve it? Who bears costs or errors?
-- HOW does the user discover, complete, reverse and recover from the action? Include data, dependencies and edge cases.
-- WHEN is it available, triggered, completed, expired or escalated? What must be true to ship?
-
-## 3. User journey and interface contract
-Entry point; primary action; secondary actions; progressive disclosure; expected navigation; desktop and mobile patterns; focus and keyboard behavior; success, loading, empty, invalid, offline and error states; copy tone; accessibility and reduced motion. Every visible control must have a useful behavior. Define confirmation only for destructive/irreversible actions.
-
-## 4. Data and business rules
-Entities and required fields; authoritative source; state transitions; validation; time zones; currency; rounding; identifiers; permissions; idempotency; duplicates; persistence; auditability; failure recovery; data retention. Mark future backend requirements separately from demo-only behavior.
-
-## 5. Acceptance criteria
-Write 5–10 independently observable Given/When/Then statements, including a negative path and an accessibility path. Avoid acceptance criteria that only say 'looks premium'.
-
-## 6. Alternatives and adversarial review
-Strongest customer, business, UX, engineering, skeptic and verifier objections; simplest alternative; risks of building vs not building; rationale for chosen scope. Give decision conclusions, not private thought transcripts.
-
-## 7. Verification plan
-Automated tests where feasible; manual browser walkthrough at narrow and wide viewports; keyboard and screen-reader checks; sample-data reconciliation; security boundaries; regression checks. State actual observed results separately from planned tests.
-
-## 8. Release and handoff
-Feature flag or demo-only label; rollout/backout; dependencies; documentation updates; GitHub Issue state; known limitations; next validation gate. No production claims without production evidence.
+## A. Identity
+ID; capability; target users; priority/dependencies; Issue links; version/date. Track specified/designed/implemented/tested/user-validated/production-ready independently, with evidence paths. Distinguish package inventory from approved implementation scope.
+## B. Business problem
+Observed process, workaround, frequency and consequences. Label supplied experience, interviews, source evidence and assumptions. No invented usage or customer outcomes.
+## C. Expected outcome
+Decision/work improved; observable acceptance and measurement method. State baseline/target as unknown or hypothesis when unmeasured.
+## D. Roles and permissions
+Explicit matrix for view/create/modify/approve/cancel/delete/override/export. Specify record/organization scope. Role names in a demo are not implemented authorization.
+## E. Entry points
+Customer context, command centre, related record, notification or search; keep selection/location/task context.
+## F. User journey
+Normal path, alternatives, cancel/draft/recovery, completion and next destination. What user sees/decides, system handles and unhappy path at each step.
+## G. Data
+Required/optional fields, validation/defaults, IDs, owner/source, version, cardinality, time/currency, snapshots, retention and concurrency.
+## H. Cross-feature integration contract
+Input; validation; outputs and changed IDs/records; consumers; next enabled action; unavailable dependency behavior; actor/permission; audit; idempotency; UI explanation. Each significant workflow needs this complete contract.
+## I. Business rules
+Eligibility, independent state transitions, exceptions/deadlines, permission boundaries and override controls.
+## J. Interface
+Identity/context/support layout, controls/one primary action, desktop/mobile, keyboard/focus/labels/reduced motion, loading/empty/error/retry/feedback and draft preservation.
+## K. Automation
+Immediate deterministic work versus future automation; trigger/conditions/data/action/actor/permission/failure/retry/dedup/audit/success. No unapproved sends.
+## L. Edge cases
+Duplicates, missing/conflicting data, partial completion, simultaneous updates, cancellations, stale/offline writes, denied permissions, dependency failure and irreversible actions.
+## M. Acceptance criteria
+Independently verifiable Given/When/Then scenarios for main path, negative paths, concurrency/idempotency and accessibility.
+## N. Verification
+Automated/manual/visual/financial/security checks; actual evidence separate from test plan. Include six-lens review conclusions.
+## O. Release criteria
+Evidence gates, rollback, limitations and next task. Completion of code/docs/tests is not user validation or production readiness.
+## P. Risks and alternatives
+Strongest objections, simplest alternative, chosen tradeoff, building/not-building costs, assumptions and evidence gap.
+## Q. Future extensions
+Useful possibilities explicitly deferred; triggers for reconsideration, not automatic scope.

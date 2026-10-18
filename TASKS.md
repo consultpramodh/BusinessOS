@@ -1,28 +1,19 @@
-# MVP tasks
+# Current execution checklist
 
-## Current connected prototype milestone (#7)
-- [x] Whole-product architecture and six-destination navigation
-- [x] Shared model, multiple jobs/customer, connected main enquiry-to-payment path
-- [x] Search/filter/new enquiry, quote revision, schedule conflicts, costs, totals, follow-up, session settings
-- [x] Deterministic model and DOM integration tests
-- [ ] Browser/mobile/keyboard/assistive-technology validation of expanded UI (#5)
-- [ ] Operational exception flows and existing-customer creation/editing
-- [ ] Operator evidence and production/security gate
+Issue #8 · 2026-10-18. Master v2 supersedes previous assumptions; historical tasks remain in git history.
 
-The older checklist below is historical; it is not a current completion report.
+- [x] Read live repository/Issues/commits and reconcile user-supplied full specification
+- [x] Recover and inspect original Sarah enquiry/scheduler images; document retained composition/exclusions
+- [x] A–N architecture, 17 feature-package contracts, inventory/dependency map, independent-record/cardinality definitions
+- [x] Integration contract envelope and Sarah 18-step transitions
+- [x] Implement/test independent enquiry qualification, immutable snapshots, version/idempotency/audit and action evaluator
+- [x] Evaluate and exercise actual OpenUI parser/component schema with pinned development packages
+- [x] Extract video description's 12 GitHub links and verify repository identities
+- [ ] B/C reference-aligned customer workspace migration with preserved drafts and independent parallel tasks
+- [ ] Real browser/mobile/keyboard/accessibility and reference comparison; no inherited approval from v1 tests
+- [ ] D versioned quote/acceptance command and prerequisite review branch
+- [ ] E/F visit/closeout then G/H invoice/allocation/economics contracts
+- [ ] K simulated message/receipt/feedback/follow-up intents, then owner decision views
+- [ ] Real operator evidence; conditional production controls; deeper capability slices only with approved evidence/spec/Issue
 
-- [ ] Define one-page customer/problem/success brief
-- [ ] Create responsive design foundation and navigation
-- [ ] Build lead → quote → booking → job → invoice interactive flow
-- [ ] Add synthetic customers, jobs and profitability calculations
-- [ ] Test mobile, desktop, accessibility and error states
-- [ ] Review data correctness, permissions and business value
-
-**Not in v0.1:** general ledger, payroll, advanced AI, multi-module ERP, complex workflow designer, production integrations.
-
-## 2026-10-17 slice
-- [x] Implement relationship-first shell and enquiry qualification (#6)
-- [x] Browser behavior checks at desktop/mobile, validation, keyboard rail, edit/resave
-- [ ] Complete assistive-technology, Safari/iOS and text zoom/contrast audit (#5)
-- [ ] Audit preserved legacy financial labels before integrating overview
-- [ ] Quote create/edit/accept (P1.2); currently only preparation empty state
+No production infrastructure or new Site deployment in the reconciliation milestone. See roadmap for exit gates; 'code/test passed' is not 'user-validated'.

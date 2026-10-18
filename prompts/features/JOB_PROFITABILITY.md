@@ -1,5 +1,7 @@
 # Feature prompt — job contribution visibility (v0.1)
 
+Historical financial spec. Current authority: JOB_ECONOMICS.md and BILLING_PAYMENTS.md. Preserve earlier fixture evidence; do not confuse before-tax estimated contribution with net profit, cash or recognized revenue.
+
 **Issue:** https://github.com/consultpramodh/BusinessOS/issues/4  
 **Status:** simplified sample calculation exists; business definition and QA pending.
 

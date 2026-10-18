@@ -1,43 +1,67 @@
-# BusinessOS — Master execution prompt
+# BusinessOS — product and execution master
 
-## Role and objective
+Version 2.0 · 2026-10-18 · user-supplied complete specification reconciled in Issue #8.
+This is the controlling product direction. Historical 2026-10-17 master and architecture are retained under docs/archive; they describe previous assumptions, not current design approval.
 
-## Approved scope clarification — 2026-10-17
-Design the complete BusinessOS operating experience before treating a slice as the whole product. Read docs/PRODUCT_ARCHITECTURE.md and prompts/features/CONNECTED_WORKSPACE.md. Today, Relationships, Work, Schedule, Money and Settings are connected views of shared records. Sarah is a synthetic reference within a multi-customer system. Full design does not imply all production capabilities exist; implement and verify in stages. This clarification takes precedence over the earlier single-screen interpretation.
-Act as a skeptical product strategist, principal UX designer, pragmatic software engineer and independent verifier working on BusinessOS. Build a minimal, trustworthy service-business operating experience that makes the journey from enquiry to payment and job-level economics understandable and easy to manage. The initial audience is owners/operators of small field-service businesses, with fireplace/gas service as a realistic starting context. This audience and product-market fit remain hypotheses until supported by interviews or paid usage.
+## 1. Mission
+Design, develop, validate and improve a premium, intelligent, context-aware operating environment for service businesses. Connect customer acquisition, needs, conversion, staff/resources, service delivery, collections, economic understanding, retention and growth. Reduce administrative work rather than add another data-entry layer. Begin with fireplace/field service; support HVAC/plumbing/electrical and other service businesses through configuration and reusable capabilities. Do not prematurely build a generic ERP.
 
-## Source of truth and startup
-Repository: https://github.com/consultpramodh/BusinessOS. At the beginning of each work session, retrieve the live main-branch versions of AGENTS.md, docs/PROJECT_INDEX.md, docs/CURRENT_STATE.md, TASKS.md, docs/DECISIONS.md, the relevant feature prompt, relevant source files and related GitHub Issues. Inspect changes since the last recorded state. Do not trust stale conversation summaries. If live GitHub access fails, explicitly state what cannot be verified. Never fabricate commits, tests, deployment URLs, user interviews, metrics, or implementation status.
+## 2. Source of truth
+Repository https://github.com/consultpramodh/BusinessOS, main. Before work read AGENTS.md; PROJECT_INDEX, CURRENT_STATE, FEATURE_EXECUTION_ROADMAP, DECISIONS, CHANGELOG; TASKS; prompt index, this master, FEATURE_TEMPLATE, UI_UX_SYSTEM, VERIFICATION, SESSION_HANDOFF; relevant feature specifications, Issues and source. Inspect recent commits. Reconcile new requirements explicitly, preserving decision history. A document, mockup, test, prototype and production system are different evidence states.
 
-## Product hypothesis
-A service business should be able to see a single job's journey: new lead → qualification/quote → accepted quote → booking → execution → invoice → payment → contribution. Each stage should have a clear owner, next action, status and audit trail in the eventual product. The first browser demo is intentionally synthetic and does not implement a secure backend or an audit trail.
+## 3. Principles
+One connected business through shared independently identified records. Context determines relevant actions. Enter data once but preserve accepted terms and historical service snapshots. Automation follows reliable, observable rules and human authority. Financial measures have separate trustworthy definitions. Complexity requires a user problem and measured outcome. Deterministic rules precede opaque AI.
 
-## Scope boundaries
-IN: polished responsive UI, clear navigation, sample job records, workflow stage interactions, accurate sample metrics, documented errors/empty states, accessible controls, manual verification.
-NOT YET: general ledger, payroll, full CRM, AI agent ecosystem, workflow engine, multi-tenant backend, external ad integrations, live payments, production customer data, advanced forecasting, custom enterprise roles. These require separate evidence-backed decisions.
+## 4. Full capability scope
+Architecture and detailed ownership: docs/PRODUCT_ARCHITECTURE.md. Inventory and dependency DAG: docs/FEATURE_INVENTORY.md. Every package below has an A–Q feature specification under prompts/features/.
+A Business command centre: attention, appointments, unassigned/delayed work, outstanding quotes/invoices, workload and relevant decisions.
+B Relationships: individual/organization customer, contacts, locations, equipment, parallel enquiries/work, interactions, documents and follow-ups.
+C Acquisition: website/phone/email/manual/referral/returning demand, attribution, matching, duplicates, classification, eligibility, priority, ownership, qualification.
+D Quotes: services/labor/materials, price/tax/discount/terms, revisions, expiry, approval and follow-up; preserve agreed version.
+E Scheduling: variable days, availability/skills/territory, customer windows, duration/travel/buffers/resources, reschedule/cancel/return visit; optimize only after reliable basics.
+F Execution: preparation/instructions/checklists, mobile arrival/completion, time, parts, photos, notes, safety, acknowledgment, additional-work approval, closeout/return visit.
+G Billing: invoices/tax/terms, deposits/partial payments/refunds, reconciliation, receivables/receipts/accounting integration; no default ledger rebuild.
+H Economics: separate revenue/invoice/cash/estimated and actual direct costs; job contribution before overhead; explain variance and service/customer/location economics.
+I Resources: catalog, stock locations/availability/reservations, vendors/POs/receipts, consumption, warranty/serial/service history; no premature warehouse suite.
+J Employees: profiles/roles/skills/certifications, availability/assignments/time/workload; no default payroll or intrusive surveillance.
+K Engagement: acknowledgments, quote/booking/reminder/change/completion/invoice/receipt/feedback/review/retention communications, with recipient, purpose, consent where applicable and delivery state.
+L Automation/integrations: trigger, conditions, data, action, actor, permissions, failure, retry/deduplication, audit and measurable success.
+M Reporting: metric definitions, sources, periods and decision ownership for conversion, time-to-quote/schedule, completion/resolution, utilization, invoices/cash/contribution/AR, repeat business and source.
+N Administration: organization/business locations/territories/catalog/pricing/team/roles/hours/notifications/integrations/industry/workflow/audit configuration.
+This scope describes long-term direction, not approval to implement every capability now or one sidebar item per capability.
 
-## Required quality standard: 4H1W
-For each feature or significant decision answer: WHAT exact user problem and measurable outcome? WHY now and why is a simpler solution insufficient? WHO performs the action, benefits, and bears risks? HOW will it behave in normal, empty, error, mobile, keyboard and edge cases? WHEN does it trigger, become useful, and meet a shipping gate?
+## 5. Domain and historical accuracy
+Use explicit organization-scoped identifiers and cardinalities from docs/DOMAIN_MODEL.md. Customer may have multiple contacts, locations, assets and unrelated active enquiries. Quote can produce multiple jobs; job can require multiple visits; invoice/payment allocation may be many-to-many. No universal customer/job status advances all commercial, service and financial state. Preserve contact/address/equipment/accepted-terms snapshots when downstream history must not change. Do not create every conceptual table now.
 
-## Adversarial review — report conclusions, not hidden deliberation
-Check from six perspectives: customer value; business economics; product/UX simplicity; engineering reliability/security; skeptical alternative/failure mode; independent verification. Summarize strongest objections, rejected options and evidence. Do not disclose private internal reasoning traces. If evidence is missing, mark the assertion as an assumption and propose the smallest test.
+## 6. Contextual actions
+Answer: what needs to happen next, why, and who may do it? Evaluate independent records, urgency/deadline/commitment/impact, prerequisites and permissions. Keep simultaneous enquiry, accepted quote, completed job, overdue invoice and future reminder visible without equal prominence. Explain blockers and priority. At most one primary action in a selected task context; supporting actions are available progressively. See ACTION_CONTEXT.md and CUSTOMER_RELATIONSHIPS.md.
 
-## Design direction
-Deliver Apple-level interaction coherence and Wealthsimple-level calm visual presentation, without copying proprietary designs or assets. Use an intentional spacing scale, typographic hierarchy, restrained color, high contrast, semantic HTML, visible focus states, keyboard interaction, responsive behavior, clear loading/empty/error states, consistent action labels, minimal motion and progressive disclosure. Avoid decorative charts, cluttered forms, redundant confirmations, dead buttons, excessive whitespace and gratuitous animation. Prefer one obvious primary action per view. Design for 360px mobile through wide desktop. Follow prompts/UI_UX_SYSTEM.md.
+## 7. Experience and visual direction
+Apple-inspired interaction consistency and Wealthsimple-inspired restraint, no copied proprietary assets. Persistent identity; contextual work; supporting records/history. Dark icon-first sidebar expands on hover and focus, pins explicitly, has labels/tooltips and must not obscure active work. Mobile uses explicit controls without hover. Minimal typing, selection controls, preserved drafts, validation/recovery, optional side panels, restrained/reduced motion and accessible responsive layouts. No unnecessary checkboxes, card grids/charts/gradients/badges, decorative hero areas or repeated customer data. Recovered visual evidence and exclusions: docs/VISUAL_REFERENCE_REVIEW.md. Existing six-route Site is a rejected-direction implementation, not the design authority.
 
-## Engineering principles
-Smallest maintainable solution; no dependency unless it materially reduces risk or effort. Current prototype uses HTML/CSS/vanilla JavaScript and synthetic data. No database or API should be introduced without an explicit acceptance criterion. Avoid over-generalized abstractions and premature architecture. Treat external input as untrusted, never expose secrets, and do not pretend demo-only UI provides tenant isolation or real financial accuracy. Keep data transformation deterministic and easy to test. Preserve existing functionality when editing.
+## 8. Feature definitions
+Every feature package uses prompts/FEATURE_TEMPLATE.md sections A–Q: identity; problem; outcome; permissions; entry; journey; data; cross-feature I/O; business rules; interface; automation; edge cases; Given/When/Then acceptance; verification; release; alternatives; extensions. Define independently shippable subfeatures in their own specification before implementing them; package inventories are not blanket implementation authorization. Define what is verified evidence versus hypothesis and measurable criteria versus observed benefit.
 
-## Definition of done
-A feature is done only when: its acceptance criteria are satisfied; relevant states and errors work; desktop and mobile layouts have been checked; keyboard accessibility is checked; sample calculations reconcile; limitations are explicit; GitHub Issue and documentation are updated; tests and manual checks are reported accurately. If browser access is unavailable, mark visual QA as unverified, not passed.
+## 9. Integration contracts
+For significant transitions define input, validation, output/changed records, connected consumers, exception/failure path, actor/permission, audit, idempotency and UI behavior. Acceptance of a quote may yield technical review instead of scheduling, never silently creates an appointment. See docs/INTEGRATION_CONTRACTS.md and SARAH_REFERENCE_JOURNEY.md.
 
-## Execution format
-1. Retrieve current repository state.
-2. State the user problem, smallest implementation, and acceptance criteria.
-3. Implement and inspect changed files.
-4. Verify behavior with available tests and explain verification gaps.
-5. Update docs/CURRENT_STATE.md, docs/CHANGELOG.md, and relevant Issues/prompts.
-6. Give a compact outcome report: committed changes, actual tests, known risks, next action.
+## 10. Reference scenario
+Sarah discovers via Google, enquires, is matched, qualifies, retains location/equipment, receives a quote, accepts, is scheduled/notified, receives service, costs are captured, invoice issued, payment reconciled, receipt delivered, feedback and follow-up planned, future opportunity considered, owner reviews history/economics. Every transition must list reused data, changes, responsible user, next action, failure, communication, financial implications and verification. This journey proves connected architecture before broader implementation; it does not force all relationships into one path.
 
-## Product success measures (hypotheses)
-Task completion, time from lead to quote, scheduling friction, invoice turnaround, correctness of job-level direct costs, owner understanding of profitability, and willingness to pay. Do not assign invented targets or claim improvement without a baseline and measured comparison.
+## 11. Execution dependencies
+Follow current roadmap: foundation → customer workflow → economic/operational intelligence → operator validation → conditional production foundations → evidence-ordered expansion → evidence-backed intelligence. Record reordering rationale and dependencies. First assignment: recover current code/docs/references; reconcile gaps; create inventory/DAG; separate built/planned/deferred; define minimum domain/workspace/actions; begin the smallest reusable priority item. No endless planning, speculative infrastructure or broad UI expansion.
+
+## 12. Engineering
+Retain simple HTML/CSS/JavaScript until requirements justify components, storage or a service layer. Isolate experimental foundation code with explicit migration status. Evaluate state, identifiers, relationships, audit, events, permissions, concurrency, recovery and tests before persistence. Never expose secrets or put real customer data into the prototype. Financial transitions require stronger production controls. No claim that client-side permission tests establish tenant isolation.
+
+## 13. Six-lens QA and evidence
+Review customer usefulness, benefit/cost, UX coherence, engineering reliability/security, skeptical alternatives and observable verification. Run VERIFICATION. Track specified, designed, implemented, tested, user-validated and production-ready separately. Browser evidence cannot be inferred from DOM tests; code commitment is not release acceptance.
+
+## 14. Continuity
+Maintain AGENTS, project index, current state, roadmap, decisions/changelog, tasks, master/UI/template/feature/verification/handoff prompts. After each meaningful milestone inspect live head; identify Issue/spec; implement; test; commit; update state/changelog/Issue; record changed decisions; identify next dependency. Update the authoritative document rather than duplicate conflicting specifications. GitHub freshness occurs at session/meaningful-change boundaries; no continuous background monitoring implied.
+
+## 15. Success
+Operator sees attention, waiting customers, scheduled work, blockers, responsibility, completed work, invoice/cash/economics and next action. Technician sees only necessary assigned work. Customer experiences communication and continuity. Owner gains visibility without redundant staff entry. Validate effectiveness with real workflows; feature count is not success.
+
+## 16. Current assignment boundary
+Reconciliation and a tested independent enquiry/snapshot/action foundation are the first milestone. Rejected frontend remains available only as historical implementation. Restore the approved visual relationship interaction through a separate reviewed migration after foundation contracts; do not redesign the entire product into module dashboards or deploy unreviewed screen changes merely to demonstrate activity.

@@ -1,5 +1,7 @@
 # Feature prompt — job lifecycle (v0.1)
 
+Historical stage-index demo. Current authority: complete master and separate QUOTES_ESTIMATES, SCHEDULING_DISPATCH, FIELD_EXECUTION, BILLING_PAYMENTS contracts. Do not turn all independent records into one lifecycle state.
+
 Historical generic lifecycle specification. Current connected implementation contract is CONNECTED_WORKSPACE.md and docs/PRODUCT_ARCHITECTURE.md. Its main path has distinct quote acceptance and service completion states. Consult CURRENT_STATE for current verification evidence; this older prompt's status text is historical.
 
 **Issue:** https://github.com/consultpramodh/BusinessOS/issues/3  

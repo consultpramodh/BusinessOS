@@ -1,5 +1,14 @@
 # Decision log
 
+## 2026-10-18 — Controlling master and rejected frontend direction
+User rejected the delivered design and supplied the complete product architecture. Supersede the earlier statement that six connected routes represented approved full-product design. Capability scope A–N is not a menu. Keep historical implementation/evidence and archive earlier master/architecture/roadmap, rather than rewriting history as success. Current authority is master v2, reconciliation and feature inventory/contracts.
+
+## 2026-10-18 — Independent domain/action foundation before more UI
+One stage-index object cannot represent simultaneous commercial/service/financial concerns or fixed historical addresses. Implement minimal independent in-memory records, immutable qualification snapshot, optimistic version/event deduplication and transparent read-only action reasoning first. Preserve existing frontend as historical reference; migrate enquiry-first with recovered visual composition and actual browser evidence. Alternative of adding more routes rejected for compounding wrong assumptions. No production infrastructure authorized.
+
+## 2026-10-18 — OpenUI bounded use and source-video references
+User requested thesysdev/openui. Use framework-independent parser/component contracts in a dev experiment; pin real SDK/Zod and validate generated presentation against authoritative domain context. Do not scaffold generic chat, load broad renderer bundle or add inference/backend merely to use it. Renderer integration remains conditional on value/accessibility/fallback evidence. Extract exact GitHub links from supplied video's description, verify identities and record applicability; do not bulk-install unrelated repositories or infer source claims from secondary summaries.
+
 ## 2026-10-17 — Smallest demonstrable workflow
 **Decision:** Build a service-business job lifecycle demo first, rather than a complete ERP.
 **Why:** Validate usefulness and navigation with minimal complexity.
